@@ -7,6 +7,7 @@ import {
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { prisma } from 'server/db';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { env } from 'env.mjs';
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -39,6 +40,7 @@ export const authOptions: NextAuthOptions = {
     strategy: 'jwt',
     maxAge: 3000
   },
+  secret: env.NEXTAUTH_SECRET,
   callbacks: {
     jwt({ token, user }) {
       if (user) {
@@ -60,7 +62,7 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        email: { label: 'Email', type: 'text', placeholder: 'jsmith' },
+        email: { label: 'Email', type: 'text' },
         password: { label: 'Password', type: 'password' }
       },
       async authorize(credentials) {
