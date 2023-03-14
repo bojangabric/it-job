@@ -1,7 +1,8 @@
-import { LoginModal } from 'components/login/modal';
+import { Modal } from 'components/modal';
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { Logo } from 'svgs/logo';
+import { LoginForm } from 'components/login-form';
 
 export const Header = () => {
   const { data: sessionData } = useSession();
@@ -15,7 +16,11 @@ export const Header = () => {
         >
           <Logo />
         </Link>
-        {!sessionData && <LoginModal />}
+        {!sessionData && (
+          <Modal buttonName="Uloguj se">
+            <LoginForm />
+          </Modal>
+        )}
         {sessionData && (
           <>
             <div>{sessionData.user.name}</div>

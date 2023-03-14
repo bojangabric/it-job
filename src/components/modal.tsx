@@ -1,8 +1,12 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Form } from 'components/login/form';
-import { Fragment, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 
-export const LoginModal = () => {
+interface ModalProps {
+  buttonName: string;
+  children: React.ReactNode;
+}
+
+export const Modal = ({ buttonName, children }: ModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -20,7 +24,7 @@ export const LoginModal = () => {
         onClick={openModal}
         className="rounded-md bg-blue-400 px-4 py-2 text-base font-medium text-white"
       >
-        Uloguj se
+        {buttonName}
       </button>
 
       <Transition appear show={isOpen} as={Fragment}>
@@ -49,7 +53,7 @@ export const LoginModal = () => {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <Form />
+                  {children}
                 </Dialog.Panel>
               </Transition.Child>
             </div>

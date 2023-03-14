@@ -1,7 +1,7 @@
 import { signIn } from 'next-auth/react';
 import { useState, type FormEvent } from 'react';
 
-export const Form = () => {
+export const LoginForm = () => {
   const [showError, setShowError] = useState(false);
 
   async function login(e: FormEvent<HTMLFormElement>) {
