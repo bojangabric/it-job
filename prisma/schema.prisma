@@ -14,20 +14,12 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-// Necessary for Next auth
-model Account {
-    id     String @id @default(cuid())
-    userId String
-    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
 model User {
-    id       String    @id @default(cuid())
+    id       String  @id @default(cuid())
     name     String?
-    email    String?   @unique
+    email    String? @unique
     password String
     location String?
     role     String
     image    String?
-    accounts Account[]
 }
