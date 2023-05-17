@@ -1,30 +1,35 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { signIn } from 'next-auth/react';
-import { useState, type FormEvent } from 'react';
+import { useState } from 'react';
+import { Button } from 'components/button';
+import { type SubmitHandler, useForm } from 'react-hook-form';
+
+interface FormFields {
+  email: string;
+  password: string;
+}
 
 export const LoginForm = () => {
   const [showError, setShowError] = useState(false);
+  const { register, handleSubmit } = useForm<FormFields>();
 
-  async function login(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
+  const onSubmit: SubmitHandler<FormFields> = async data => {
     const res = await signIn('credentials', {
-      email: e.target.email.value,
-      password: e.target.sifra.value,
+      email: data.email,
+      password: data.password,
       redirect: false
     });
-
     setShowError(!res?.ok);
-  }
+  };
 
   return (
-    <form className="space-y-6" method="POST" onSubmit={e => void login(e)}>
+    <form className="space-y-6" method="POST" onSubmit={handleSubmit(onSubmit)}>
       <label className="block">
         Email
         <input
           type="email"
           className="block w-full rounded-md border border-gray-300 p-3"
-          name="email"
-          required
+          {...register('email', { required: true })}
         />
       </label>
       <label className="block">
@@ -32,16 +37,10 @@ export const LoginForm = () => {
         <input
           type="password"
           className="block w-full rounded-md border border-gray-300 p-3"
-          name="sifra"
-          required
+          {...register('password', { required: true })}
         />
       </label>
-      <button
-        type="submit"
-        className="relative flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-3 px-4 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-      >
-        Uloguj se
-      </button>
+      <Button label="Uloguj se" />
       {showError && (
         <p className="rounded bg-red-200 px-2 py-2 text-red-600">
           Pogresan email ili sifra.

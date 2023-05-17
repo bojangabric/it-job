@@ -3,6 +3,7 @@ import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { Logo } from 'svgs/logo';
 import { LoginForm } from 'components/login-form';
+import { RegisterForm } from 'components/register/register-form';
 
 export const Header = () => {
   const { data: sessionData } = useSession();
@@ -17,9 +18,15 @@ export const Header = () => {
           <Logo />
         </Link>
         {!sessionData && (
-          <Modal buttonName="Uloguj se">
-            <LoginForm />
-          </Modal>
+          <div className="flex gap-2">
+            <Modal buttonName="Uloguj se">
+              <LoginForm />
+            </Modal>
+            /
+            <Modal buttonName="Registruj se">
+              <RegisterForm />
+            </Modal>
+          </div>
         )}
         {sessionData && (
           <>

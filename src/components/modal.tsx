@@ -22,7 +22,7 @@ export const Modal = ({ buttonName, children }: ModalProps) => {
       <button
         type="button"
         onClick={openModal}
-        className="rounded-md bg-blue-400 px-4 py-2 text-base font-medium text-white"
+        className="text-base font-medium text-white"
       >
         {buttonName}
       </button>
@@ -38,7 +38,7 @@ export const Modal = ({ buttonName, children }: ModalProps) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
+            <div className="fixed inset-0 bg-black bg-opacity-40" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
