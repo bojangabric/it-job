@@ -1,24 +1,11 @@
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
+import { ButtonLink } from 'components/button-link';
 import Testimonials from 'components/testimonials';
-import Head from 'next/head';
-import Link from 'next/link';
 import { Pattern } from 'svgs/pattern';
-
-const ButtonLink = ({ className, text, link }) => (
-  <Link
-    href={link}
-    className={`${className} rounded-md px-5 py-3 text-base font-medium`}
-  >
-    {text}
-  </Link>
-);
 
 const Home = () => {
   return (
     <>
-      <Head>
-        <title>Home page - ITJob</title>
-      </Head>
       <div className="overflow-hidden bg-blue-500 text-white">
         <div className="relative my-32 mx-auto max-w-3xl text-center">
           <div className="absolute top-0 right-0 hidden h-52 w-52 text-blue-700 md:-mr-64 md:-mt-20 md:block">

@@ -1,0 +1,22 @@
+{
+  "filters": [
+    {
+      "name": "Tip",
+      "options": ["Praksa", "Part-Time", "Full-Time", "Contract"]
+    },
+    {
+      "name": "Iskustvo",
+      "options": ["Student", "Junior", "Mid-level", "Senior", "Lead"]
+    },
+    {
+      "name": "Pozicija",
+      "options": [
+        "Front-End Developer",
+        "Back-End Developer",
+        "Full-Stack Developer",
+        "UI/UX Designer",
+        "System Administrator"
+      ]
+    }
+  ]
+}
