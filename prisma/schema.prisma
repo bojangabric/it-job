@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite"
+    provider = "postgresql"
     // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.Text annotations in model Account below
     // Further reading:
     // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
@@ -15,11 +15,27 @@ datasource db {
 }
 
 model User {
-    id       String  @id @default(cuid())
+    id       String    @id @default(cuid())
     name     String?
-    email    String? @unique
+    email    String?   @unique
     password String
     location String?
     role     String
     image    String?
+    jobPosts JobPost[]
+}
+
+model JobPost {
+    id          String   @id @default(cuid())
+    active      Boolean
+    title       String
+    employerId  String
+    description String
+    skills      String[]
+    experience  String
+    position    String
+    type        String
+    employer    User     @relation(fields: [employerId], references: [id])
+
+    @@map("jobPosts")
 }
