@@ -45,6 +45,8 @@ export function useFilters() {
   if (experience) url += `Iskustvo=${experience.toString()}&`;
   if (type) url += `Tip=${type.toString()}&`;
   if (position) url += `Pozicija=${position.toString()}&`;
+  if (title) url += `Title=${title.toString()}&`;
+  if (location) url += `Location=${location.toString()}&`;
 
   const addToUrl = (name: string, option: string) => {
     if (!url.includes(name)) return `${url}${name}=${option}`;
