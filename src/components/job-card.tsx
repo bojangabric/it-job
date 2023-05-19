@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react';
 type JobCardProps = {
   job: JobPost & {
     employer: {
-      image: string | null;
+      image: string;
       name: string | null;
       location: string | null;
     };
@@ -20,10 +20,7 @@ export const JobCard = ({ job }: JobCardProps) => {
     <div className="flex flex-col rounded-md bg-white p-6 shadow">
       <div className="flex items-center space-x-4">
         <div className="flex h-10 w-10 items-center">
-          <img
-            className=""
-            src={employer.image || '/images/default_avatar.png'}
-          />
+          <img className="" src={employer.image} />
         </div>
         <div className="relative w-full">
           <div className="font-medium">{employer.name}</div>

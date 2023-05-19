@@ -27,7 +27,7 @@ model User {
     password String
     location String?
     role     Role
-    image    String?
+    image    String    @default("/images/default_avatar.png")
     jobPosts JobPost[]
 }
 
