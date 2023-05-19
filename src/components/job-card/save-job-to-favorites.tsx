@@ -4,12 +4,13 @@ import { api } from 'utils/api';
 
 export const SaveJobToFavorites = ({ jobId }: { jobId: string }) => {
   const { data, update } = useSession();
-  const addToFavorites = api.jobPosts.addToFavorites.useMutation({
+  const { mutate: addToFavorites } = api.jobPosts.addToFavorites.useMutation({
     onSuccess: update
   });
-  const removeFromFavorites = api.jobPosts.removeFromFavorites.useMutation({
-    onSuccess: update
-  });
+  const { mutate: removeFromFavorites } =
+    api.jobPosts.removeFromFavorites.useMutation({
+      onSuccess: update
+    });
 
   if (data?.user.role !== 'KANDIDAT') return <></>;
 
@@ -17,7 +18,7 @@ export const SaveJobToFavorites = ({ jobId }: { jobId: string }) => {
     return (
       <div
         className="absolute top-0 right-0 w-6"
-        onClick={() => removeFromFavorites.mutate(jobId)}
+        onClick={() => removeFromFavorites(jobId)}
       >
         <HeartIcon className="cursor-pointer text-red-500" />
       </div>
@@ -27,7 +28,7 @@ export const SaveJobToFavorites = ({ jobId }: { jobId: string }) => {
   return (
     <div
       className="absolute top-0 right-0 w-6"
-      onClick={() => addToFavorites.mutate(jobId)}
+      onClick={() => addToFavorites(jobId)}
     >
       <HeartIcon className="cursor-pointer text-gray-300 transition hover:text-red-400" />
     </div>

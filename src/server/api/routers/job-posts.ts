@@ -98,5 +98,53 @@ export const jobPostsRouter = createTRPCRouter({
           }
         }
       });
+    }),
+  getById: publicProcedure.input(z.string()).query(async ({ input, ctx }) => {
+    return await ctx.prisma.jobPost.findFirst({
+      include: {
+        postedBy: {
+          select: {
+            name: true,
+            location: true,
+            image: true
+          }
+        }
+      },
+      where: {
+        id: input
+      }
+    });
+  }),
+  apply: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ input, ctx }) => {
+      await ctx.prisma.user.update({
+        where: {
+          id: ctx.session.user.id
+        },
+        data: {
+          appliedJobs: {
+            connect: {
+              id: input
+            }
+          }
+        }
+      });
+    }),
+  cancelApplication: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ input, ctx }) => {
+      await ctx.prisma.user.update({
+        where: {
+          id: ctx.session.user.id
+        },
+        data: {
+          appliedJobs: {
+            disconnect: {
+              id: input
+            }
+          }
+        }
+      });
     })
 });

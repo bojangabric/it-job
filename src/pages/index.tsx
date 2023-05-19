@@ -21,19 +21,18 @@ const Home = () => {
           </div>
           <div className="flex justify-center space-x-6">
             <ButtonLink
-              link="/oglasi"
+              link="/jobs"
               className="bg-blue-700"
               text="Nađi posao"
             />
             <ButtonLink
-              link="/oglasi"
+              link="/jobs"
               className="bg-yellow-400 text-gray-800"
               text="Postavi oglas"
             />
           </div>
         </div>
       </div>
-      {/* <FeaturedJobs oglasi={oglasi} /> */}
       <div className="my-32 mx-auto flex max-w-5xl items-center space-x-16">
         <div className="w-1/2 space-y-8">
           <p className="text-3xl font-bold">

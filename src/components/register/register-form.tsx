@@ -15,7 +15,7 @@ export const RegisterForm = () => {
   const [selectedRole, setSelectedRole] = useState<ROLE>('KANDIDAT');
   const { register, handleSubmit, getValues } = useForm<FORM_FIELDS>();
 
-  const registerUser = api.user.register.useMutation({
+  const { mutate: registerUser } = api.user.register.useMutation({
     onSuccess: async () => {
       await signIn('credentials', {
         email: getValues('email'),
@@ -26,7 +26,7 @@ export const RegisterForm = () => {
   });
 
   const onSubmit: SubmitHandler<FORM_FIELDS> = data => {
-    registerUser.mutate({
+    registerUser({
       ...data,
       role: selectedRole
     });

@@ -44,7 +44,7 @@ export const JobCard = ({ job }: JobCardProps) => {
       <div className="mt-8 flex items-center justify-between">
         <div className="mt-px text-sm font-medium text-gray-500">{type}</div>
         <a
-          href={`/oglasi/${id}`}
+          href={`/jobs/${id}`}
           className="font-medium text-blue-600 transition hover:text-blue-800"
         >
           Prijavi se

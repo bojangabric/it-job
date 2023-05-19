@@ -8,7 +8,7 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { prisma } from 'server/db';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { env } from 'env.mjs';
-import { type JobPost, type Role } from '@prisma/client';
+import { type Role } from '@prisma/client';
 
 declare module 'next-auth' {
   interface Session extends DefaultSession {
@@ -16,6 +16,7 @@ declare module 'next-auth' {
       id: string;
       role: Role;
       favoriteJobs: string[];
+      appliedJobs: string[];
     } & DefaultSession['user'];
   }
 }
@@ -44,6 +45,11 @@ export const authOptions: NextAuthOptions = {
             select: {
               id: true
             }
+          },
+          appliedJobs: {
+            select: {
+              id: true
+            }
           }
         }
       });
@@ -54,6 +60,7 @@ export const authOptions: NextAuthOptions = {
         session.user.favoriteJobs = user.favoriteJobs.map(
           jobPost => jobPost.id
         );
+        session.user.appliedJobs = user.appliedJobs.map(jobPost => jobPost.id);
       }
       return session;
     }
