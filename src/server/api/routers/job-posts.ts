@@ -6,9 +6,24 @@ export const jobPostsRouter = createTRPCRouter({
     .input(
       z
         .object({
-          experience: z.string().array().optional(),
-          type: z.string().array().optional(),
-          position: z.string().array().optional(),
+          experience: z
+            .enum(['STUDENT', 'JUNIOR', 'MID_LEVEL', 'SENIOR', 'LEAD'])
+            .array()
+            .optional(),
+          type: z
+            .enum(['PRAKSA', 'PART_TIME', 'FULL_TIME', 'CONTRACT'])
+            .array()
+            .optional(),
+          position: z
+            .enum([
+              'FRONT_END_DEVELOPER',
+              'BACK_END_DEVELOPER',
+              'FULL_STACK_DEVELOPER',
+              'UI_UX_DESIGNER',
+              'SYSTEM_ADMINISTRATOR'
+            ])
+            .array()
+            .optional(),
           title: z.string().optional(),
           location: z.string().optional()
         })
@@ -17,7 +32,7 @@ export const jobPostsRouter = createTRPCRouter({
     .query(async ({ input, ctx }) => {
       return await ctx.prisma.jobPost.findMany({
         include: {
-          employer: {
+          postedBy: {
             select: {
               name: true,
               location: true,
@@ -39,7 +54,7 @@ export const jobPostsRouter = createTRPCRouter({
             contains: input?.title,
             mode: 'insensitive'
           },
-          employer: {
+          postedBy: {
             location: {
               contains: input?.location,
               mode: 'insensitive'
