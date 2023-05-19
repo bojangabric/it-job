@@ -27,7 +27,7 @@ enum EmploymentType {
     CONTRACT
 }
 
-enum EXPERIENCE {
+enum Experience {
     STUDENT
     JUNIOR
     MID_LEVEL
@@ -35,7 +35,7 @@ enum EXPERIENCE {
     LEAD
 }
 
-enum POSITION {
+enum Position {
     FRONT_END_DEVELOPER
     BACK_END_DEVELOPER
     FULL_STACK_DEVELOPER
@@ -61,8 +61,8 @@ model JobPost {
     title        String
     description  String
     skills       String[]
-    experience   EXPERIENCE
-    position     POSITION
+    experience   Experience
+    position     Position
     type         EmploymentType
     postedById   String
     postedBy     User           @relation("postedJobs", fields: [postedById], references: [id])
