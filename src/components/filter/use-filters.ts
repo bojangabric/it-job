@@ -1,4 +1,10 @@
+import {
+  type Position,
+  type EmploymentType,
+  type Experience
+} from '@prisma/client';
 import { useRouter } from 'next/router';
+import { transformToEnum } from 'utils/transform-to-enum';
 
 function regexAdd(name: string, option: string, url: string) {
   const regexp = new RegExp(`(?<=${name}=)([^&\n]+)`, 'g');
@@ -33,9 +39,19 @@ export function useFilters() {
   const location = query.Location;
 
   const activeFilters = {
-    experience: convertToArray(experience),
-    type: convertToArray(type),
-    position: convertToArray(position),
+    experience: convertToArray(experience) as Experience[],
+    type: convertToArray(type) as EmploymentType[],
+    position: convertToArray(position) as Position[],
+    title: convertToString(title),
+    location: convertToString(location)
+  };
+
+  const activeEnumFilters = {
+    experience: convertToArray(experience)?.map(
+      transformToEnum
+    ) as Experience[],
+    type: convertToArray(type)?.map(transformToEnum) as EmploymentType[],
+    position: convertToArray(position)?.map(transformToEnum) as Position[],
     title: convertToString(title),
     location: convertToString(location)
   };
@@ -69,5 +85,5 @@ export function useFilters() {
     return url.replace(search[0], withoutOption);
   };
 
-  return { addToUrl, removeFromUrl, activeFilters };
+  return { addToUrl, removeFromUrl, activeFilters, activeEnumFilters };
 }

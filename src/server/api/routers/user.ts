@@ -5,7 +5,7 @@ export const userRouter = createTRPCRouter({
   register: publicProcedure
     .input(
       z.object({
-        role: z.string(),
+        role: z.enum(['KANDIDAT', 'POSLODAVAC', 'MODERATOR']),
         name: z.string(),
         email: z.string(),
         password: z.string(),

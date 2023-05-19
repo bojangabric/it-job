@@ -1,4 +1,8 @@
-import { createTRPCRouter, publicProcedure } from 'server/api/trpc';
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure
+} from 'server/api/trpc';
 import { z } from 'zod';
 
 export const jobPostsRouter = createTRPCRouter({
@@ -58,6 +62,38 @@ export const jobPostsRouter = createTRPCRouter({
             location: {
               contains: input?.location,
               mode: 'insensitive'
+            }
+          }
+        }
+      });
+    }),
+  addToFavorites: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ input, ctx }) => {
+      await ctx.prisma.user.update({
+        where: {
+          id: ctx.session.user.id
+        },
+        data: {
+          favoriteJobs: {
+            connect: {
+              id: input
+            }
+          }
+        }
+      });
+    }),
+  removeFromFavorites: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ input, ctx }) => {
+      await ctx.prisma.user.update({
+        where: {
+          id: ctx.session.user.id
+        },
+        data: {
+          favoriteJobs: {
+            disconnect: {
+              id: input
             }
           }
         }
