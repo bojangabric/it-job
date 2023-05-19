@@ -20,28 +20,53 @@ enum Role {
     MODERATOR
 }
 
+enum EmploymentType {
+    PRAKSA
+    PART_TIME
+    FULL_TIME
+    CONTRACT
+}
+
+enum EXPERIENCE {
+    STUDENT
+    JUNIOR
+    MID_LEVEL
+    SENIOR
+    LEAD
+}
+
+enum POSITION {
+    FRONT_END_DEVELOPER
+    BACK_END_DEVELOPER
+    FULL_STACK_DEVELOPER
+    UI_UX_DESIGNER
+    SYSTEM_ADMINISTRATOR
+}
+
 model User {
-    id       String    @id @default(cuid())
-    name     String?
-    email    String    @unique
-    password String
-    location String?
-    role     Role
-    image    String    @default("/images/default_avatar.png")
-    jobPosts JobPost[]
+    id           String    @id @default(cuid())
+    name         String?
+    email        String    @unique
+    password     String
+    location     String?
+    role         Role
+    image        String    @default("/images/default_avatar.png")
+    postedJobs   JobPost[] @relation("postedJobs")
+    favoriteJobs JobPost[] @relation("favoriteJobs")
 }
 
 model JobPost {
-    id          String   @id @default(cuid())
-    active      Boolean
-    title       String
-    employerId  String
-    description String
-    skills      String[]
-    experience  String
-    position    String
-    type        String
-    employer    User     @relation(fields: [employerId], references: [id])
+    id           String         @id @default(cuid())
+    active       Boolean
+    title        String
+    description  String
+    skills       String[]
+    experience   EXPERIENCE
+    position     POSITION
+    type         EmploymentType
+    postedById   String
+    postedBy     User           @relation("postedJobs", fields: [postedById], references: [id])
+    favoriteJobs User[]         @relation("favoriteJobs")
 
     @@map("jobPosts")
 }
