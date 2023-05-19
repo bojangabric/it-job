@@ -47,6 +47,7 @@ model User {
     postedJobs   JobPost[] @relation("postedJobs")
     favoriteJobs JobPost[] @relation("favoriteJobs")
     appliedJobs  JobPost[] @relation("appliedJobs")
+    comments     Comment[]
 }
 
 model JobPost {
@@ -62,6 +63,18 @@ model JobPost {
     postedBy     User           @relation("postedJobs", fields: [postedById], references: [id])
     favoriteJobs User[]         @relation("favoriteJobs")
     appliedJobs  User[]         @relation("appliedJobs")
+    comments     Comment[]
 
     @@map("jobPosts")
+}
+
+model Comment {
+    id        String  @id @default(cuid())
+    comment   String
+    jobId     JobPost @relation(fields: [jobPostId], references: [id])
+    writtenBy User    @relation(fields: [userId], references: [id])
+    userId    String
+    jobPostId String
+
+    @@map("comments")
 }

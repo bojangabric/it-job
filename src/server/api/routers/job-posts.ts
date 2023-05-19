@@ -102,6 +102,16 @@ export const jobPostsRouter = createTRPCRouter({
   getById: publicProcedure.input(z.string()).query(async ({ input, ctx }) => {
     return await ctx.prisma.jobPost.findFirst({
       include: {
+        comments: {
+          include: {
+            writtenBy: {
+              select: {
+                name: true,
+                image: true
+              }
+            }
+          }
+        },
         postedBy: {
           select: {
             name: true,
@@ -142,6 +152,30 @@ export const jobPostsRouter = createTRPCRouter({
           appliedJobs: {
             disconnect: {
               id: input
+            }
+          }
+        }
+      });
+    }),
+  comment: protectedProcedure
+    .input(
+      z.object({
+        comment: z.string(),
+        jobId: z.string()
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      await ctx.prisma.comment.create({
+        data: {
+          comment: input.comment,
+          jobId: {
+            connect: {
+              id: input.jobId
+            }
+          },
+          writtenBy: {
+            connect: {
+              id: ctx.session.user.id
             }
           }
         }
