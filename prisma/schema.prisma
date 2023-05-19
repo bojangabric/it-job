@@ -14,13 +14,19 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+enum Role {
+    KANDIDAT
+    POSLODAVAC
+    MODERATOR
+}
+
 model User {
     id       String    @id @default(cuid())
     name     String?
-    email    String?   @unique
+    email    String    @unique
     password String
     location String?
-    role     String
+    role     Role
     image    String?
     jobPosts JobPost[]
 }

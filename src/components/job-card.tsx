@@ -1,5 +1,6 @@
 import { HeartIcon } from '@heroicons/react/24/solid';
 import { type JobPost } from '@prisma/client';
+import { useSession } from 'next-auth/react';
 
 type JobCardProps = {
   job: JobPost & {
@@ -13,6 +14,7 @@ type JobCardProps = {
 
 export const JobCard = ({ job }: JobCardProps) => {
   const { title, skills, type, id, employer } = job;
+  const { data } = useSession();
 
   return (
     <div className="flex flex-col rounded-md bg-white p-6 shadow">
@@ -28,9 +30,11 @@ export const JobCard = ({ job }: JobCardProps) => {
           <div className="text-sm font-medium text-gray-500">
             {employer.location}
           </div>
-          <div className="absolute top-0 right-0 w-6">
-            <HeartIcon className="cursor-pointer text-gray-300" />
-          </div>
+          {data?.user.role === 'KANDIDAT' && (
+            <div className="absolute top-0 right-0 w-6">
+              <HeartIcon className="cursor-pointer text-gray-300" />
+            </div>
+          )}
         </div>
       </div>
       <div className="mt-6 text-lg font-semibold">{title}</div>
