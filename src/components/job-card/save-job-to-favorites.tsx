@@ -14,7 +14,9 @@ export const SaveJobToFavorites = ({ jobId }: { jobId: string }) => {
 
   if (data?.user.role !== 'KANDIDAT') return <></>;
 
-  if (data.user.favoriteJobs.includes(jobId)) {
+  const favoriteJobsIds = data?.user.favoriteJobs.map(jobPost => jobPost.id);
+
+  if (favoriteJobsIds.includes(jobId)) {
     return (
       <div
         className="absolute top-0 right-0 w-6"

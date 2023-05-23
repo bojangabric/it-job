@@ -1,19 +1,13 @@
-import { type JobPost } from '@prisma/client';
 import { SaveJobToFavorites } from './save-job-to-favorites';
+import { type JobPostWithEmployer } from 'next-auth';
 
-type JobCardProps = {
-  job: JobPost & {
-    postedBy: {
-      image: string;
-      name: string | null;
-      location: string | null;
-    };
-  };
-};
-
-export const JobCard = ({ job }: JobCardProps) => {
-  const { title, skills, type, id, postedBy } = job;
-
+export const JobCard = ({
+  title,
+  skills,
+  type,
+  id,
+  postedBy
+}: JobPostWithEmployer) => {
   return (
     <div className="flex flex-col rounded-md bg-white p-6 shadow">
       <div className="flex items-center space-x-4">

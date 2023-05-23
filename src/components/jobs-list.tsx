@@ -19,7 +19,7 @@ export const JobsList = () => {
           <img src="/images/no_results.png" />
         </div>
       ) : (
-        jobPosts.map(job => <JobCard key={job.id} job={job} />)
+        jobPosts.map(job => <JobCard key={job.id} {...job} />)
       )}
     </div>
   );

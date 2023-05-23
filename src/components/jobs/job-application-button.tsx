@@ -11,7 +11,9 @@ export const JobApplicationButton = ({ jobId }: { jobId: string }) => {
       onSuccess: update
     });
 
-  if (data?.user.appliedJobs.includes(jobId)) {
+  const appliedJobsIds = data?.user.appliedJobs.map(jobPost => jobPost.id);
+
+  if (appliedJobsIds?.includes(jobId)) {
     return (
       <div className="mt-10 text-center">
         <button
@@ -35,7 +37,7 @@ export const JobApplicationButton = ({ jobId }: { jobId: string }) => {
       </button>
       {!data && (
         <div className="mt-4 text-sm italic text-gray-700">
-          Morate se ulogovati prvo da bi ste se prijavili na posao.
+          Morate se ulogovati prvo da biste se prijavili na posao.
         </div>
       )}
     </div>
