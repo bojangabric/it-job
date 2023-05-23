@@ -3,14 +3,14 @@ import { TableLayout } from 'components/tables/table-layout';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 
-export const SavedJobs = () => {
+export const AppliedJobs = () => {
   const { data } = useSession();
-  const savedJobs = data?.user.savedJobs;
+  const appliedJobs = data?.user.appliedJobs;
 
-  if (!savedJobs || savedJobs.length === 0)
+  if (!appliedJobs || appliedJobs.length === 0)
     return (
       <div className="mx-auto my-20 max-w-2xl justify-center rounded bg-blue-50 px-8 py-4 text-lg">
-        Niste sačuvali nijedan posao za sada. Pogledajte sve{' '}
+        Niste se prijavili ni na jedan posao za sada. Pogledajte sve{' '}
         <Link href="/jobs" className="text-blue-600">
           otvorene pozicije
         </Link>
@@ -21,7 +21,7 @@ export const SavedJobs = () => {
   return (
     <div className="mx-auto my-20 max-w-7xl shadow-md sm:rounded-lg">
       <TableLayout>
-        {savedJobs?.map(job => (
+        {appliedJobs?.map(job => (
           <Row {...job} key={job.id} />
         ))}
       </TableLayout>
@@ -29,4 +29,4 @@ export const SavedJobs = () => {
   );
 };
 
-export default SavedJobs;
+export default AppliedJobs;

@@ -1,9 +1,10 @@
-import { Row } from 'components/saved-jobs-table/row';
-import { useSession } from 'next-auth/react';
+import { type ReactNode } from 'react';
 
-export const SavedJobsTable = () => {
-  const { data } = useSession();
+type TableLayoutProps = {
+  children: ReactNode;
+};
 
+export const TableLayout = ({ children }: TableLayoutProps) => {
   return (
     <table className="w-full text-left text-sm text-gray-500">
       <thead className="bg-gray-50 text-xs uppercase text-gray-700">
@@ -26,11 +27,7 @@ export const SavedJobsTable = () => {
           <th scope="col" className="px-6 py-3"></th>
         </tr>
       </thead>
-      <tbody>
-        {data?.user.savedJobs.map(job => (
-          <Row {...job} key={job.id} />
-        ))}
-      </tbody>
+      <tbody>{children}</tbody>
     </table>
   );
 };

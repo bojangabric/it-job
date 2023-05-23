@@ -1,4 +1,5 @@
 import { type JobPostWithEmployer } from 'next-auth';
+import Link from 'next/link';
 import { transformExperienceToValue } from 'utils/transform-experience-to-value';
 import { transformPositionToValue } from 'utils/transform-position-to-value';
 import { transformTypeToValue } from 'utils/transform-type-to-value';
@@ -38,9 +39,12 @@ export const Row = ({
         ))}
       </td>
       <td className="px-6 py-4">
-        <a href={`/jobs/${id}`} className="text-blue-500 hover:text-blue-700">
+        <Link
+          href={`/jobs/${id}`}
+          className="text-blue-500 hover:text-blue-700"
+        >
           Vidi oglas
-        </a>
+        </Link>
       </td>
     </tr>
   );
