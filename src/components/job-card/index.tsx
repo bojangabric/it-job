@@ -1,4 +1,4 @@
-import { SaveJobToFavorites } from './save-job-to-favorites';
+import { SaveJobButton } from './save-job-button';
 import { type JobPostWithEmployer } from 'next-auth';
 
 export const JobCard = ({
@@ -19,7 +19,7 @@ export const JobCard = ({
           <div className="text-sm font-medium text-gray-500">
             {postedBy.location}
           </div>
-          <SaveJobToFavorites jobId={id} />
+          <SaveJobButton jobId={id} />
         </div>
       </div>
       <div className="mt-6 text-lg font-semibold">{title}</div>

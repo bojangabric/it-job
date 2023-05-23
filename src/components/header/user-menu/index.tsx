@@ -35,11 +35,7 @@ export default function UserMenu() {
               type="link"
               href="/applied"
             />
-            <UserMenuItem
-              label="Sačuvani oglasi"
-              type="link"
-              href="/favorites"
-            />
+            <UserMenuItem label="Sačuvani oglasi" type="link" href="/saved" />
           </div>
           <div className="px-1 py-1">
             <UserMenuItem label="Moj profil" type="link" href="/profile" />

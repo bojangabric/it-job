@@ -67,7 +67,7 @@ export const jobPostsRouter = createTRPCRouter({
         }
       });
     }),
-  addToFavorites: protectedProcedure
+  saveJob: protectedProcedure
     .input(z.string())
     .mutation(async ({ input, ctx }) => {
       await ctx.prisma.user.update({
@@ -75,7 +75,7 @@ export const jobPostsRouter = createTRPCRouter({
           id: ctx.session.user.id
         },
         data: {
-          favoriteJobs: {
+          savedJobs: {
             connect: {
               id: input
             }
@@ -83,7 +83,7 @@ export const jobPostsRouter = createTRPCRouter({
         }
       });
     }),
-  removeFromFavorites: protectedProcedure
+  removeSavedJob: protectedProcedure
     .input(z.string())
     .mutation(async ({ input, ctx }) => {
       await ctx.prisma.user.update({
@@ -91,7 +91,7 @@ export const jobPostsRouter = createTRPCRouter({
           id: ctx.session.user.id
         },
         data: {
-          favoriteJobs: {
+          savedJobs: {
             disconnect: {
               id: input
             }

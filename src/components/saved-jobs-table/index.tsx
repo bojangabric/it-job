@@ -27,7 +27,7 @@ export const SavedJobsTable = () => {
         </tr>
       </thead>
       <tbody>
-        {data?.user.favoriteJobs.map(job => (
+        {data?.user.savedJobs.map(job => (
           <Row {...job} key={job.id} />
         ))}
       </tbody>

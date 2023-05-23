@@ -23,7 +23,7 @@ declare module 'next-auth' {
     user: {
       id: string;
       role: Role;
-      favoriteJobs: JobPostWithEmployer[];
+      savedJobs: JobPostWithEmployer[];
       appliedJobs: JobPostWithEmployer[];
     } & DefaultSession['user'];
   }
@@ -49,7 +49,7 @@ export const authOptions: NextAuthOptions = {
           email: session.user.email || ''
         },
         include: {
-          favoriteJobs: {
+          savedJobs: {
             include: {
               postedBy: true
             }
@@ -65,7 +65,7 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         session.user.role = user.role;
         session.user.id = user.id;
-        session.user.favoriteJobs = user.favoriteJobs;
+        session.user.savedJobs = user.savedJobs;
         session.user.appliedJobs = user.appliedJobs;
       }
       return session;

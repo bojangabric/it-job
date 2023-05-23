@@ -1,6 +1,6 @@
 import { SavedJobsTable } from 'components/saved-jobs-table';
 
-const Favorites = () => {
+const SavedJobs = () => {
   return (
     <div className="mx-auto my-20 max-w-7xl shadow-md sm:rounded-lg">
       <SavedJobsTable />
@@ -8,4 +8,4 @@ const Favorites = () => {
   );
 };
 
-export default Favorites;
+export default SavedJobs;

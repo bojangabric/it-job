@@ -37,33 +37,33 @@ enum Position {
 }
 
 model User {
-    id           String    @id @default(cuid())
-    name         String?
-    email        String    @unique
-    password     String
-    location     String?
-    role         Role
-    image        String    @default("/images/default_avatar.png")
-    postedJobs   JobPost[] @relation("postedJobs")
-    favoriteJobs JobPost[] @relation("favoriteJobs")
-    appliedJobs  JobPost[] @relation("appliedJobs")
-    comments     Comment[]
+    id          String    @id @default(cuid())
+    name        String?
+    email       String    @unique
+    password    String
+    location    String?
+    role        Role
+    image       String    @default("/images/default_avatar.png")
+    postedJobs  JobPost[] @relation("postedJobs")
+    savedJobs   JobPost[] @relation("savedJobs")
+    appliedJobs JobPost[] @relation("appliedJobs")
+    comments    Comment[]
 }
 
 model JobPost {
-    id           String         @id @default(cuid())
-    active       Boolean
-    title        String
-    description  String
-    skills       String[]
-    experience   Experience
-    position     Position
-    type         EmploymentType
-    postedById   String
-    postedBy     User           @relation("postedJobs", fields: [postedById], references: [id])
-    favoriteJobs User[]         @relation("favoriteJobs")
-    appliedJobs  User[]         @relation("appliedJobs")
-    comments     Comment[]
+    id          String         @id @default(cuid())
+    active      Boolean
+    title       String
+    description String
+    skills      String[]
+    experience  Experience
+    position    Position
+    type        EmploymentType
+    postedById  String
+    postedBy    User           @relation("postedJobs", fields: [postedById], references: [id])
+    savedJobs   User[]         @relation("savedJobs")
+    appliedJobs User[]         @relation("appliedJobs")
+    comments    Comment[]
 
     @@map("jobPosts")
 }
