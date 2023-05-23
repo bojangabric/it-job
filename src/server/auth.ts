@@ -25,6 +25,7 @@ declare module 'next-auth' {
       role: Role;
       savedJobs: JobPostWithEmployer[];
       appliedJobs: JobPostWithEmployer[];
+      image: string;
     } & DefaultSession['user'];
   }
 }
