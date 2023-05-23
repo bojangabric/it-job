@@ -1,5 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react';
-import React, { Fragment, useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { Fragment, useEffect, useState } from 'react';
 
 interface ModalProps {
   buttonName: string;
@@ -8,14 +9,29 @@ interface ModalProps {
 
 export const Modal = ({ buttonName, children }: ModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
-  function closeModal() {
-    setIsOpen(false);
-  }
+  useEffect(() => {
+    if (router.query.modal === buttonName) {
+      setIsOpen(true);
+    }
+  }, [router.query.modal, buttonName]);
 
-  function openModal() {
+  const openModal = () => {
     setIsOpen(true);
-  }
+    void router.push({
+      pathname: router.pathname,
+      query: { modal: buttonName, id: router.query.id }
+    });
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+    void router.push({
+      pathname: router.pathname,
+      query: { id: router.query.id }
+    });
+  };
 
   return (
     <>

@@ -1,6 +1,7 @@
 import { Row } from 'components/tables/row';
 import { TableLayout } from 'components/tables/table-layout';
-import { useSession } from 'next-auth/react';
+import { type GetServerSidePropsContext } from 'next';
+import { getSession, useSession } from 'next-auth/react';
 import Link from 'next/link';
 
 export const SavedJobs = () => {
@@ -30,3 +31,20 @@ export const SavedJobs = () => {
 };
 
 export default SavedJobs;
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/?modal=Uloguj+se',
+        permanent: false
+      }
+    };
+  }
+
+  return {
+    props: {}
+  };
+}
