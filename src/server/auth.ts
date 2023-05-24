@@ -26,6 +26,7 @@ declare module 'next-auth' {
       savedJobs: JobPostWithEmployer[];
       appliedJobs: JobPostWithEmployer[];
       image: string;
+      resume: string | null;
     } & DefaultSession['user'];
   }
 }
@@ -68,6 +69,7 @@ export const authOptions: NextAuthOptions = {
         session.user.id = user.id;
         session.user.savedJobs = user.savedJobs;
         session.user.appliedJobs = user.appliedJobs;
+        session.user.resume = user.resume;
       }
       return session;
     }

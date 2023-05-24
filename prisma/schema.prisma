@@ -48,6 +48,7 @@ model User {
     savedJobs   JobPost[] @relation("savedJobs")
     appliedJobs JobPost[] @relation("appliedJobs")
     comments    Comment[]
+    resume      String?
 }
 
 model JobPost {
