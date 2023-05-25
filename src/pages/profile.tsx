@@ -1,7 +1,8 @@
 import { Image } from 'components/profile/fields/image';
-import { TextField } from 'components/profile/fields/text-field';
+import { Resume } from 'components/profile/fields/resume';
 import { type GetServerSidePropsContext } from 'next';
 import { getSession, useSession } from 'next-auth/react';
+import { FieldRow } from 'components/profile/field-row';
 
 const Profile = () => {
   const { data } = useSession();
@@ -21,8 +22,9 @@ const Profile = () => {
         </p>
       </div>
       <Image image={user.image} />
-      <TextField field="Ime i prezime" value={user.name} />
-      <TextField field="Email" value={user.email} />
+      <FieldRow fieldName="Ime i prezime">{user.name}</FieldRow>
+      <FieldRow fieldName="Email">{user.email}</FieldRow>
+      <Resume resume={user.resume} />
     </div>
   );
 };

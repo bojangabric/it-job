@@ -38,5 +38,17 @@ export const userRouter = createTRPCRouter({
           image: input
         }
       });
+    }),
+  updateResume: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ input, ctx }) => {
+      return await ctx.prisma.user.update({
+        where: {
+          id: ctx.session.user.id
+        },
+        data: {
+          resume: input
+        }
+      });
     })
 });

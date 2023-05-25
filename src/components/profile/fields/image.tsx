@@ -1,14 +1,7 @@
 import { useSession } from 'next-auth/react';
-import { type ChangeEvent } from 'react';
 import { api } from 'utils/api';
 import { FieldRow } from 'components/profile/field-row';
-
-const cloudName = 'dzjr25qbl';
-const uploadPreset = 'i9igsfde';
-
-export interface UploadApiResponse {
-  url: string;
-}
+import { handleFileUpload } from 'utils/upload/handle-upload-file';
 
 export const Image = ({ image }: { image: string }) => {
   const { update } = useSession();
@@ -16,34 +9,6 @@ export const Image = ({ image }: { image: string }) => {
   const { mutate: updateImage } = api.user.updateImage.useMutation({
     onSuccess: update
   });
-
-  const uploadFile = async (file: File) => {
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', uploadPreset);
-    const response = await fetch(
-      `https://api.cloudinary.com/v1_1/${cloudName}/upload`,
-      {
-        method: 'POST',
-        body: formData
-      }
-    );
-    const data = (await response.json()) as UploadApiResponse;
-    return data;
-  };
-
-  const handleFileUpload = async (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      try {
-        const result = await uploadFile(file);
-        updateImage(result.url);
-        console.log('File upload successful:', result);
-      } catch (error) {
-        console.error('File upload error:', error);
-      }
-    }
-  };
 
   return (
     <FieldRow fieldName="Slika">
@@ -62,7 +27,7 @@ export const Image = ({ image }: { image: string }) => {
             <input
               type="file"
               className="hidden"
-              onChange={e => void handleFileUpload(e)}
+              onChange={e => void handleFileUpload(e, updateImage)}
             />
           </label>
         </div>
