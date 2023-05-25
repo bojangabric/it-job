@@ -63,7 +63,8 @@ export const jobPostsRouter = createTRPCRouter({
               contains: input?.location,
               mode: 'insensitive'
             }
-          }
+          },
+          active: true
         }
       });
     }),
@@ -178,6 +179,35 @@ export const jobPostsRouter = createTRPCRouter({
               id: ctx.session.user.id
             }
           }
+        }
+      });
+    }),
+  removeJobPost: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ input, ctx }) => {
+      await ctx.prisma.jobPost.delete({
+        where: {
+          id: input
+        }
+      });
+    }),
+  toggleJob: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ input, ctx }) => {
+      const value = await ctx.prisma.jobPost.findUnique({
+        where: {
+          id: input
+        }
+      });
+
+      if (!value) return;
+
+      await ctx.prisma.jobPost.update({
+        where: {
+          id: input
+        },
+        data: {
+          active: !value.active
         }
       });
     })
