@@ -1,5 +1,9 @@
 import { z } from 'zod';
-import { createTRPCRouter, publicProcedure } from 'server/api/trpc';
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure
+} from 'server/api/trpc';
 
 export const userRouter = createTRPCRouter({
   register: publicProcedure
@@ -22,5 +26,17 @@ export const userRouter = createTRPCRouter({
     .query(
       async ({ input, ctx }) =>
         await ctx.prisma.user.findUnique({ where: { id: input } })
-    )
+    ),
+  updateImage: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ input, ctx }) => {
+      return await ctx.prisma.user.update({
+        where: {
+          id: ctx.session.user.id
+        },
+        data: {
+          image: input
+        }
+      });
+    })
 });
