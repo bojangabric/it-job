@@ -38,7 +38,7 @@ enum Position {
 
 model User {
     id          String    @id @default(cuid())
-    name        String?
+    name        String
     email       String    @unique
     password    String
     location    String?

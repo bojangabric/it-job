@@ -14,7 +14,7 @@ declare module 'next-auth' {
   interface JobPostWithEmployer extends JobPost {
     postedBy: {
       image: string;
-      name: string | null;
+      name: string;
       location: string | null;
     };
   }
@@ -27,6 +27,8 @@ declare module 'next-auth' {
       appliedJobs: JobPostWithEmployer[];
       image: string;
       resume: string | null;
+      name: string;
+      email: string;
     } & DefaultSession['user'];
   }
 }
@@ -70,6 +72,7 @@ export const authOptions: NextAuthOptions = {
         session.user.savedJobs = user.savedJobs;
         session.user.appliedJobs = user.appliedJobs;
         session.user.resume = user.resume;
+        session.user.image = user.image;
       }
       return session;
     }
