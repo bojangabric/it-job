@@ -10,7 +10,7 @@ export const Header = () => {
   const { data } = useSession();
 
   return (
-    <div className="bg-blue-500 py-8 text-sm text-white">
+    <div className="relative z-40 bg-blue-500 py-8 text-sm text-white">
       <div className="mx-auto flex max-w-4xl items-center justify-between px-4">
         <Link
           href="/"
