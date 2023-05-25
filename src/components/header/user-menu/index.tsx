@@ -5,6 +5,31 @@ import { useSession } from 'next-auth/react';
 import { UserMenuItem } from './user-menu-item';
 import { signOut } from 'next-auth/react';
 
+const MenuOptions = {
+  KANDIDAT: [
+    {
+      label: 'Oglasi na koje ste se prijavili',
+      href: '/applied'
+    },
+    { label: 'Sačuvani oglasi', type: 'link', href: '/saved' },
+    { label: 'Moj profil', type: 'link', href: '/profile' }
+  ],
+  POSLODAVAC: [
+    {
+      label: 'Vaši oglasi',
+      href: '/posted-jobs'
+    },
+    { label: 'Moj profil', type: 'link', href: '/profile' }
+  ],
+  MODERATOR: [
+    {
+      label: 'Vaši oglasi',
+      href: '/posted-jobs'
+    },
+    { label: 'Moj profil', href: '/profile' }
+  ]
+};
+
 export default function UserMenu() {
   const { data } = useSession();
 
@@ -32,15 +57,15 @@ export default function UserMenu() {
         >
           <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <div className="px-1 py-1">
-              <UserMenuItem
-                label="Oglasi na koje ste se prijavili"
-                type="link"
-                href="/applied"
-              />
-              <UserMenuItem label="Sačuvani oglasi" type="link" href="/saved" />
-            </div>
-            <div className="px-1 py-1">
-              <UserMenuItem label="Moj profil" type="link" href="/profile" />
+              {data?.user.role &&
+                MenuOptions[data?.user.role].map(option => (
+                  <UserMenuItem
+                    key={option.href}
+                    type="link"
+                    href={option.href}
+                    label={option.label}
+                  />
+                ))}
             </div>
             <div className="px-1 py-1">
               <UserMenuItem
