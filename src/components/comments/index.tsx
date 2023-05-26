@@ -34,7 +34,7 @@ export const Comments = ({
           <div>{comment.comment}</div>
         </div>
       ))}
-      {data && <CommentInput jobId={jobId} />}
+      {data?.user.role === 'KANDIDAT' && <CommentInput jobId={jobId} />}
     </div>
   );
 };
