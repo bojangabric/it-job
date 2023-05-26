@@ -1,4 +1,5 @@
 import { type ReactNode } from 'react';
+import { AddJobPost } from 'components/add-job-post';
 
 type TableLayoutProps = {
   children: ReactNode;
@@ -6,8 +7,9 @@ type TableLayoutProps = {
 
 export const PostedJobsTable = ({ children }: TableLayoutProps) => {
   return (
-    <div className="mx-auto my-20 max-w-7xl shadow-md sm:rounded-lg">
-      <table className="w-full text-left text-sm text-gray-500">
+    <div className="mx-auto my-20 max-w-7xl">
+      <AddJobPost />
+      <table className="mt-8 w-full text-left text-sm text-gray-500 shadow-md sm:rounded-lg">
         <thead className="bg-gray-50 text-xs uppercase text-gray-700">
           <tr>
             <th scope="col" className="px-6 py-3 text-center">

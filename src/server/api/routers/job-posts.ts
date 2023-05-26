@@ -210,5 +210,41 @@ export const jobPostsRouter = createTRPCRouter({
           active: !value.active
         }
       });
+    }),
+  createJobPost: protectedProcedure
+    .input(
+      z.object({
+        active: z.boolean(),
+        title: z.string(),
+        experience: z.enum([
+          'STUDENT',
+          'JUNIOR',
+          'MID_LEVEL',
+          'SENIOR',
+          'LEAD'
+        ]),
+        type: z.enum(['PRAKSA', 'PART_TIME', 'FULL_TIME', 'CONTRACT']),
+        position: z.enum([
+          'FRONT_END_DEVELOPER',
+          'BACK_END_DEVELOPER',
+          'FULL_STACK_DEVELOPER',
+          'UI_UX_DESIGNER',
+          'SYSTEM_ADMINISTRATOR'
+        ]),
+        skills: z.string().array(),
+        description: z.string()
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      return await ctx.prisma.jobPost.create({
+        data: {
+          ...input,
+          postedBy: {
+            connect: {
+              id: ctx.session.user.id
+            }
+          }
+        }
+      });
     })
 });
