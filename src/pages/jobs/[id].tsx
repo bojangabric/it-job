@@ -1,6 +1,7 @@
 import { Comments } from 'components/comments';
 import { JobApplicationButton } from 'components/jobs/job-application-button';
 import { type GetServerSidePropsContext } from 'next';
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import { api } from 'utils/api';
 
 const JobPost = ({ jobId }: { jobId: string }) => {
@@ -18,6 +19,7 @@ const JobPost = ({ jobId }: { jobId: string }) => {
             <p className="mt-2 mb-8 text-3xl">{job.postedBy.name}</p>
           </div>
         </div>
+        <ReactMarkdown className="prose">{job.description}</ReactMarkdown>
         <JobApplicationButton jobId={jobId} />
         <Comments comments={job.comments} jobId={jobId} />
       </div>
