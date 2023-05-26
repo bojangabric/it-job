@@ -24,7 +24,7 @@ interface FieldTypes {
   description: string;
 }
 
-const Form = forwardRef<HTMLDivElement, FormProps>(({ closeModal }, ref) => {
+const Form = forwardRef<HTMLFormElement, FormProps>(({ closeModal }, ref) => {
   const [values, setValues] = useState<FieldTypes>({
     active: false,
     title: '',
@@ -41,8 +41,13 @@ const Form = forwardRef<HTMLDivElement, FormProps>(({ closeModal }, ref) => {
   });
 
   return (
-    <div
+    <form
       ref={ref}
+      onSubmit={e => {
+        e.preventDefault();
+        createJobPost(values);
+        closeModal();
+      }}
       className="my-8 inline-block w-full max-w-6xl transform overflow-hidden rounded-lg bg-white p-6 text-left align-middle shadow-xl transition-all"
     >
       <div className="px-4 py-5 sm:px-6">
@@ -140,6 +145,7 @@ const Form = forwardRef<HTMLDivElement, FormProps>(({ closeModal }, ref) => {
                 onChange={e =>
                   setValues({ ...values, description: e.target.value })
                 }
+                required
                 rows={20}
                 className="block w-full rounded-md border border-gray-300 p-3"
               ></textarea>
@@ -156,17 +162,13 @@ const Form = forwardRef<HTMLDivElement, FormProps>(({ closeModal }, ref) => {
           Prekini
         </button>
         <button
-          type="button"
+          type="submit"
           className="rounded bg-blue-500 px-4 py-2 font-medium text-white hover:bg-blue-600 focus:outline-none"
-          onClick={() => {
-            createJobPost(values);
-            closeModal();
-          }}
         >
           Napravi novi oglas
         </button>
       </div>
-    </div>
+    </form>
   );
 });
 
