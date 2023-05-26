@@ -73,8 +73,8 @@ model JobPost {
 model Comment {
     id        String  @id @default(cuid())
     comment   String
-    jobId     JobPost @relation(fields: [jobPostId], references: [id])
-    writtenBy User    @relation(fields: [userId], references: [id])
+    jobId     JobPost @relation(fields: [jobPostId], references: [id], onDelete: Cascade)
+    writtenBy User    @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId    String
     jobPostId String
 
