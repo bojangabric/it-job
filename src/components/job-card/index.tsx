@@ -1,3 +1,4 @@
+import { transformTypeToValue } from 'utils/transform-type-to-value';
 import { SaveJobButton } from './save-job-button';
 import { type JobPostWithEmployer } from 'next-auth';
 
@@ -36,7 +37,9 @@ export const JobCard = ({
         </ul>
       </div>
       <div className="mt-8 flex items-center justify-between">
-        <div className="mt-px text-sm font-medium text-gray-500">{type}</div>
+        <div className="mt-px text-sm font-medium text-gray-500">
+          {transformTypeToValue(type)}
+        </div>
         <a
           href={`/jobs/${id}`}
           className="font-medium text-blue-600 transition hover:text-blue-800"
