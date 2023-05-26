@@ -65,6 +65,7 @@ model JobPost {
     savedJobs   User[]         @relation("savedJobs")
     appliedJobs User[]         @relation("appliedJobs")
     comments    Comment[]
+    createdAt   DateTime       @default(now())
 
     @@map("jobPosts")
 }
