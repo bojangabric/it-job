@@ -4,6 +4,8 @@ import { api } from 'utils/api';
 import { transformExperienceToValue } from 'utils/transform-experience-to-value';
 import { transformPositionToValue } from 'utils/transform-position-to-value';
 import { transformTypeToValue } from 'utils/transform-type-to-value';
+import { Toggle } from './toggle';
+import { XCircleIcon } from '@heroicons/react/24/solid';
 
 export const PostedJobRow = ({
   title,
@@ -27,12 +29,7 @@ export const PostedJobRow = ({
   return (
     <tr className="border-b bg-white hover:bg-gray-50">
       <td className="flex items-center justify-center whitespace-nowrap px-6 py-4 text-gray-900">
-        <input
-          className="h-6 w-6"
-          type="checkbox"
-          checked={active}
-          onChange={() => toggleJob(id)}
-        />
+        <Toggle enabled={active} onChange={() => toggleJob(id)} />
       </td>
       <td className="px-6 py-4">
         <div className="text-base font-semibold text-gray-900">{title}</div>
@@ -53,11 +50,8 @@ export const PostedJobRow = ({
         ))}
       </td>
       <td className="px-6 py-4">
-        <button
-          onClick={() => removeJob(id)}
-          className="text-red-500 hover:text-red-700"
-        >
-          Obriši oglas
+        <button onClick={() => removeJob(id)}>
+          <XCircleIcon className="h-8 w-8 text-gray-400 transition hover:text-red-400" />
         </button>
       </td>
     </tr>
