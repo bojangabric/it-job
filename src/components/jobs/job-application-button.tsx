@@ -11,6 +11,8 @@ export const JobApplicationButton = ({ jobId }: { jobId: string }) => {
       onSuccess: update
     });
 
+  if (['POSLODAVAC', 'MODERATOR'].includes(data?.user.role || '')) return <></>;
+
   const appliedJobsIds = data?.user.appliedJobs.map(jobPost => jobPost.id);
 
   if (appliedJobsIds?.includes(jobId)) {
