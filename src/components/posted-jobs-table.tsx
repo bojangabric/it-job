@@ -27,6 +27,9 @@ export const PostedJobsTable = ({ children }: TableLayoutProps) => {
             <th scope="col" className="px-6 py-3">
               Veštine
             </th>
+            <th scope="col" className="px-6 py-3">
+              Oglas napravljen
+            </th>
             <th scope="col" className="px-6 py-3"></th>
           </tr>
         </thead>

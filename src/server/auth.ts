@@ -64,7 +64,11 @@ export const authOptions: NextAuthOptions = {
               postedBy: true
             }
           },
-          postedJobs: true
+          postedJobs: {
+            orderBy: {
+              createdAt: 'desc'
+            }
+          }
         }
       });
 

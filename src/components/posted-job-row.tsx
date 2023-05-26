@@ -6,6 +6,7 @@ import { transformPositionToValue } from 'utils/transform-position-to-value';
 import { transformTypeToValue } from 'utils/transform-type-to-value';
 import { Toggle } from './toggle';
 import { XCircleIcon } from '@heroicons/react/24/solid';
+import { formatDistance } from 'date-fns';
 
 export const PostedJobRow = ({
   title,
@@ -14,7 +15,8 @@ export const PostedJobRow = ({
   type,
   skills,
   id,
-  active
+  active,
+  createdAt
 }: JobPost) => {
   const { update } = useSession();
 
@@ -48,6 +50,11 @@ export const PostedJobRow = ({
             {skill}
           </span>
         ))}
+      </td>
+      <td className="px-6 py-4">
+        {formatDistance(new Date(createdAt), new Date(), {
+          addSuffix: true
+        })}
       </td>
       <td className="px-6 py-4">
         <button onClick={() => removeJob(id)}>
