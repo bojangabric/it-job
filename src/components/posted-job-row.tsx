@@ -7,6 +7,7 @@ import { transformTypeToValue } from 'utils/transform-type-to-value';
 import { Toggle } from './toggle';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 import { formatDistance } from 'date-fns';
+import Link from 'next/link';
 
 export const PostedJobRow = ({
   title,
@@ -34,10 +35,12 @@ export const PostedJobRow = ({
         <Toggle enabled={active} onChange={() => toggleJob(id)} />
       </td>
       <td className="px-6 py-4">
-        <div className="text-base font-semibold text-gray-900">{title}</div>
-        <div className="font-normal text-gray-500">
-          {transformPositionToValue(position)}
-        </div>
+        <Link href={`jobs/${id}`}>
+          <div className="text-base font-semibold text-gray-900">{title}</div>
+          <div className="font-normal text-gray-500">
+            {transformPositionToValue(position)}
+          </div>
+        </Link>
       </td>
       <td className="px-6 py-4">{transformExperienceToValue(experience)}</td>
       <td className="px-6 py-4">{transformTypeToValue(type)}</td>
