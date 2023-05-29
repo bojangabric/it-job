@@ -95,6 +95,7 @@ model Company {
 
 model Job {
     id          String         @id @default(cuid())
+    approved    Boolean
     active      Boolean
     title       String
     description String
