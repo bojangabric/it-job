@@ -57,11 +57,12 @@ model Account {
 }
 
 model Application {
-    id     String             @id @default(cuid())
-    status APPLICATION_STATUS
+    id        String             @id @default(cuid())
+    status    APPLICATION_STATUS
+    appliedAt DateTime           @default(now())
 
-    candidate   Candidate @relation(fields: [candidateId], references: [id])
-    job         Job       @relation(fields: [jobId], references: [id])
+    candidate   Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+    job         Job       @relation(fields: [jobId], references: [id], onDelete: Cascade)
     candidateId String
     jobId       String
 
