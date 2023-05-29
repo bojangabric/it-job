@@ -40,7 +40,7 @@ export const CandidateRow = ({
       </td>
       <td className="px-6 py-4">
         <Link
-          href={`profile/${candidate.account.id}`}
+          href={`profile/${candidate.id}`}
           className="text-blue-600 hover:text-blue-800"
         >
           Pogledaj detalje

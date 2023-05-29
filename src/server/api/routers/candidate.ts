@@ -27,6 +27,16 @@ export const candidateRouter = createTRPCRouter({
         }
       });
     }),
+  getById: publicProcedure.input(z.string()).query(async ({ input, ctx }) => {
+    return await ctx.prisma.candidate.findUnique({
+      where: {
+        id: input
+      },
+      include: {
+        account: true
+      }
+    });
+  }),
   updateResume: protectedProcedure
     .input(z.string())
     .mutation(async ({ input, ctx }) => {
