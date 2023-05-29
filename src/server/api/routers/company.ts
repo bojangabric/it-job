@@ -89,9 +89,35 @@ export const companyRouter = createTRPCRouter({
           ...input,
           postedBy: {
             connect: {
-              id: ctx.session.user.id
+              accountId: ctx.session.user.id
             }
           }
+        }
+      });
+    }),
+  rejectCandidate: protectedProcedure
+    .input(z.object({ candidateId: z.string(), jobId: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      return await ctx.prisma.application.updateMany({
+        where: {
+          candidateId: input.candidateId,
+          jobId: input.jobId
+        },
+        data: {
+          status: 'REJECTED'
+        }
+      });
+    }),
+  acceptCandidate: protectedProcedure
+    .input(z.object({ candidateId: z.string(), jobId: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      return await ctx.prisma.application.updateMany({
+        where: {
+          candidateId: input.candidateId,
+          jobId: input.jobId
+        },
+        data: {
+          status: 'ACCEPTED'
         }
       });
     })

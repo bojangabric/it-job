@@ -36,7 +36,7 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ closeModal }, ref) => {
   });
   const { update } = useSession();
 
-  const { mutate: createJobPost } = api.jobPosts.createJobPost.useMutation({
+  const { mutate: createJobPost } = api.company.createJobPost.useMutation({
     onSuccess: update
   });
 

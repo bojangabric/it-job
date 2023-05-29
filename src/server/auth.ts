@@ -28,6 +28,18 @@ declare module 'next-auth' {
     };
   }
 
+  interface JobWithCandidates extends Job {
+    applicants: (Application & {
+      candidate: Candidate & {
+        account: {
+          name: string;
+          image: string;
+          id: string;
+        };
+      };
+    })[];
+  }
+
   interface Session extends DefaultSession {
     user:
       | {
@@ -60,7 +72,7 @@ declare module 'next-auth' {
           email: string;
           image: string;
           company: Company & {
-            jobs: Job[];
+            jobs: JobWithCandidates[];
           };
         }
       | {
@@ -95,7 +107,25 @@ export const authOptions: NextAuthOptions = {
         include: {
           company: {
             include: {
-              jobs: true
+              jobs: {
+                orderBy: {
+                  createdAt: 'desc'
+                },
+                include: {
+                  applicants: {
+                    orderBy: {
+                      appliedAt: 'desc'
+                    },
+                    include: {
+                      candidate: {
+                        include: {
+                          account: true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
           },
           candidate: {

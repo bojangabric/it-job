@@ -1,4 +1,3 @@
-import { type Job } from '@prisma/client';
 import { useSession } from 'next-auth/react';
 import { api } from 'utils/api';
 import { transformExperienceToValue } from 'utils/transform-experience-to-value';
@@ -8,6 +7,8 @@ import { Toggle } from './toggle';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 import { formatDistance } from 'date-fns';
 import Link from 'next/link';
+import { ViewCandidates } from './view-candidates';
+import { type JobWithCandidates } from 'next-auth';
 
 export const PostedJobRow = ({
   title,
@@ -17,8 +18,9 @@ export const PostedJobRow = ({
   skills,
   id,
   active,
-  createdAt
-}: Job) => {
+  createdAt,
+  applicants
+}: JobWithCandidates) => {
   const { update } = useSession();
 
   const { mutate: removeJob } = api.company.removeJobPost.useMutation({
@@ -30,7 +32,7 @@ export const PostedJobRow = ({
   });
 
   return (
-    <tr className="border-b bg-white hover:bg-gray-50">
+    <tr className="border-b">
       <td className="flex items-center justify-center whitespace-nowrap px-6 py-4 text-gray-900">
         <Toggle enabled={active} onChange={() => toggleJob(id)} />
       </td>
@@ -59,10 +61,12 @@ export const PostedJobRow = ({
           addSuffix: true
         })}
       </td>
-      <td className="px-6 py-4">
-        <button onClick={() => removeJob(id)}>
-          <XCircleIcon className="h-8 w-8 text-gray-400 transition hover:text-red-400" />
-        </button>
+      <td className="flex items-center gap-2 px-6 py-4">
+        <ViewCandidates candidates={applicants} />
+        <XCircleIcon
+          className="h-8 w-8 cursor-pointer text-red-400 transition hover:text-red-600"
+          onClick={() => removeJob(id)}
+        />
       </td>
     </tr>
   );
