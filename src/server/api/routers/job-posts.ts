@@ -50,6 +50,7 @@ export const jobPostsRouter = createTRPCRouter({
         },
         where: {
           active: true,
+          approved: true,
           experience: {
             in: input?.experience
           },

@@ -18,13 +18,15 @@ export const ViewCandidates = ({
     setIsOpen(true);
   }
 
+  if (candidates.length === 0) return <>Nema kandidata</>;
+
   return (
     <>
       <button
         onClick={openModal}
         className="text-gray-600 underline hover:text-gray-900"
       >
-        Pogledaj sve kandidate
+        Pogledaj kandidate
       </button>
 
       <Transition appear show={isOpen} as={Fragment}>
