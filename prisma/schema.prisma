@@ -74,7 +74,7 @@ model Candidate {
     comments  Comment[]
     savedJobs Job[]
 
-    account      Account?      @relation(fields: [accountId], references: [id])
+    account      Account       @relation(fields: [accountId], references: [id])
     accountId    String        @unique
     applications Application[]
 
@@ -86,8 +86,8 @@ model Company {
     location String
     jobs     Job[]  @relation("jobs")
 
-    account   Account? @relation(fields: [accountId], references: [id])
-    accountId String   @unique
+    account   Account @relation(fields: [accountId], references: [id])
+    accountId String  @unique
 
     @@map("companies")
 }
