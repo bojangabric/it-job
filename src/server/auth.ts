@@ -14,6 +14,7 @@ import {
   type Company,
   type Job
 } from '@prisma/client';
+import bcrypt from 'bcrypt';
 
 declare module 'next-auth' {
   interface JobPostWithEmployer extends Job {
@@ -213,9 +214,12 @@ export const authOptions: NextAuthOptions = {
           }
         });
 
-        if (!user) return null;
+        if (!user || !credentials?.password) return null;
 
-        const verifyPassword = user.password === credentials?.password;
+        const verifyPassword = bcrypt.compareSync(
+          credentials.password,
+          user.password
+        );
 
         if (!verifyPassword) return null;
 

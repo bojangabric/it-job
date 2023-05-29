@@ -4,6 +4,7 @@ import {
   protectedProcedure,
   publicProcedure
 } from 'server/api/trpc';
+import bcrypt from 'bcrypt';
 
 export const candidateRouter = createTRPCRouter({
   register: publicProcedure
@@ -20,7 +21,7 @@ export const candidateRouter = createTRPCRouter({
           name: input.name,
           role: 'KANDIDAT',
           email: input.email,
-          password: input.password,
+          password: await bcrypt.hash(input.password, 10),
           candidate: {
             create: {}
           }
