@@ -6,7 +6,7 @@ import { handleFileUpload } from 'utils/upload/handle-upload-file';
 export const UpdateResume = ({ resume }: { resume: string }) => {
   const { update } = useSession();
 
-  const { mutate: updateResume } = api.user.updateResume.useMutation({
+  const { mutate: updateResume } = api.candidate.updateResume.useMutation({
     onSuccess: update
   });
 

@@ -15,7 +15,17 @@ export const RegisterForm = () => {
   const [selectedRole, setSelectedRole] = useState<ROLE>('KANDIDAT');
   const { register, handleSubmit, getValues } = useForm<FORM_FIELDS>();
 
-  const { mutate: registerUser } = api.user.register.useMutation({
+  const { mutate: registerCompany } = api.company.register.useMutation({
+    onSuccess: async () => {
+      await signIn('credentials', {
+        email: getValues('email'),
+        password: getValues('password'),
+        redirect: false
+      });
+    }
+  });
+
+  const { mutate: registerCandidate } = api.candidate.register.useMutation({
     onSuccess: async () => {
       await signIn('credentials', {
         email: getValues('email'),
@@ -26,10 +36,14 @@ export const RegisterForm = () => {
   });
 
   const onSubmit: SubmitHandler<FORM_FIELDS> = data => {
-    registerUser({
-      ...data,
-      role: selectedRole
-    });
+    if (selectedRole === 'KANDIDAT')
+      registerCandidate({
+        ...data
+      });
+    else
+      registerCompany({
+        ...data
+      });
   };
 
   return (

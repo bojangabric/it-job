@@ -8,10 +8,10 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { prisma } from 'server/db';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { env } from 'env.mjs';
-import { type JobPost, type Role } from '@prisma/client';
+import { type Candidate, type Company, type Job } from '@prisma/client';
 
 declare module 'next-auth' {
-  interface JobPostWithEmployer extends JobPost {
+  interface JobPostWithEmployer extends Job {
     postedBy: {
       image: string;
       name: string;
@@ -20,17 +20,30 @@ declare module 'next-auth' {
   }
 
   interface Session extends DefaultSession {
-    user: {
-      id: string;
-      role: Role;
-      savedJobs: JobPostWithEmployer[];
-      appliedJobs: JobPostWithEmployer[];
-      image: string;
-      resume: string | null;
-      name: string;
-      email: string;
-      postedJobs: JobPost[];
-    } & DefaultSession['user'];
+    user:
+      | {
+          id: string;
+          role: 'KANDIDAT';
+          name: string;
+          email: string;
+          image: string;
+          candidate: Candidate;
+        }
+      | {
+          id: string;
+          role: 'POSLODAVAC';
+          name: string;
+          email: string;
+          image: string;
+          company: Company;
+        }
+      | {
+          id: string;
+          role: 'MODERATOR';
+          name: string;
+          email: string;
+          image: string;
+        };
   }
 }
 
@@ -49,37 +62,24 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session }) {
-      const user = await prisma.user.findFirst({
+      const user = await prisma.account.findFirst({
         where: {
           email: session.user.email || ''
         },
         include: {
-          savedJobs: {
-            include: {
-              postedBy: true
-            }
-          },
-          appliedJobs: {
-            include: {
-              postedBy: true
-            }
-          },
-          postedJobs: {
-            orderBy: {
-              createdAt: 'desc'
-            }
-          }
+          company: true,
+          candidate: true
         }
       });
 
       if (user) {
         session.user.role = user.role;
         session.user.id = user.id;
-        session.user.savedJobs = user.savedJobs;
-        session.user.appliedJobs = user.appliedJobs;
-        session.user.resume = user.resume;
         session.user.image = user.image;
-        session.user.postedJobs = user.postedJobs;
+        if (session.user.role === 'POSLODAVAC' && user.company)
+          session.user.company = user.company;
+        if (session.user.role === 'KANDIDAT' && user.candidate)
+          session.user.candidate = user.candidate;
       }
       return session;
     }
@@ -97,7 +97,7 @@ export const authOptions: NextAuthOptions = {
         password: { label: 'Password', type: 'password' }
       },
       async authorize(credentials) {
-        const user = await prisma.user.findFirst({
+        const user = await prisma.account.findFirst({
           where: {
             email: credentials?.email
           }
