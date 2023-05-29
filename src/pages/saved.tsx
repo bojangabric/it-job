@@ -6,7 +6,10 @@ import Link from 'next/link';
 
 export const SavedJobs = () => {
   const { data } = useSession();
-  const savedJobs = data?.user.savedJobs;
+
+  if (data?.user.role !== 'KANDIDAT') return <></>;
+
+  const savedJobs = data?.user.candidate.savedJobs;
 
   if (!savedJobs || savedJobs.length === 0)
     return (

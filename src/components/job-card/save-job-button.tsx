@@ -4,16 +4,16 @@ import { api } from 'utils/api';
 
 export const SaveJobButton = ({ jobId }: { jobId: string }) => {
   const { data, update } = useSession();
-  const { mutate: saveJob } = api.jobPosts.saveJob.useMutation({
+  const { mutate: saveJob } = api.candidate.saveJob.useMutation({
     onSuccess: update
   });
-  const { mutate: removeSavedJob } = api.jobPosts.removeSavedJob.useMutation({
+  const { mutate: removeSavedJob } = api.candidate.removeSavedJob.useMutation({
     onSuccess: update
   });
 
   if (data?.user.role !== 'KANDIDAT') return <></>;
 
-  const savedJobsIds = data?.user.savedJobs.map(jobPost => jobPost.id);
+  const savedJobsIds = data.user.candidate.savedJobs.map(jobPost => jobPost.id);
 
   if (savedJobsIds.includes(jobId)) {
     return (

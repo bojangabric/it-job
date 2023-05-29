@@ -8,14 +8,23 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { prisma } from 'server/db';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { env } from 'env.mjs';
-import { type Candidate, type Company, type Job } from '@prisma/client';
+import {
+  type Application,
+  type Candidate,
+  type Company,
+  type Job
+} from '@prisma/client';
 
 declare module 'next-auth' {
   interface JobPostWithEmployer extends Job {
     postedBy: {
-      image: string;
-      name: string;
-      location: string | null;
+      account: {
+        image: string;
+        name: string;
+        company: {
+          location: string;
+        } | null;
+      };
     };
   }
 
@@ -27,7 +36,22 @@ declare module 'next-auth' {
           name: string;
           email: string;
           image: string;
-          candidate: Candidate;
+          candidate: Candidate & {
+            savedJobs: JobPostWithEmployer[];
+            applications: (Application & {
+              job: Job & {
+                postedBy: {
+                  account: {
+                    image: string;
+                    name: string;
+                    company: {
+                      location: string;
+                    } | null;
+                  };
+                };
+              };
+            })[];
+          };
         }
       | {
           id: string;
@@ -35,7 +59,9 @@ declare module 'next-auth' {
           name: string;
           email: string;
           image: string;
-          company: Company;
+          company: Company & {
+            jobs: Job[];
+          };
         }
       | {
           id: string;
@@ -67,8 +93,57 @@ export const authOptions: NextAuthOptions = {
           email: session.user.email || ''
         },
         include: {
-          company: true,
-          candidate: true
+          company: {
+            include: {
+              jobs: true
+            }
+          },
+          candidate: {
+            include: {
+              savedJobs: {
+                include: {
+                  postedBy: {
+                    select: {
+                      account: {
+                        select: {
+                          name: true,
+                          image: true,
+                          company: {
+                            select: {
+                              location: true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              applications: {
+                include: {
+                  job: {
+                    include: {
+                      postedBy: {
+                        select: {
+                          account: {
+                            select: {
+                              name: true,
+                              image: true,
+                              company: {
+                                select: {
+                                  location: true
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       });
 
@@ -76,10 +151,15 @@ export const authOptions: NextAuthOptions = {
         session.user.role = user.role;
         session.user.id = user.id;
         session.user.image = user.image;
-        if (session.user.role === 'POSLODAVAC' && user.company)
+        if (session.user.role === 'POSLODAVAC' && user.company) {
           session.user.company = user.company;
-        if (session.user.role === 'KANDIDAT' && user.candidate)
+          session.user.company.jobs = user.company.jobs;
+        }
+        if (session.user.role === 'KANDIDAT' && user.candidate) {
           session.user.candidate = user.candidate;
+          session.user.candidate.savedJobs = user.candidate.savedJobs;
+          session.user.candidate.applications = user.candidate.applications;
+        }
       }
       return session;
     }

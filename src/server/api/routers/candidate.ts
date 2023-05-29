@@ -42,5 +42,90 @@ export const candidateRouter = createTRPCRouter({
           }
         }
       });
+    }),
+  saveJob: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ input, ctx }) => {
+      await ctx.prisma.candidate.update({
+        where: {
+          accountId: ctx.session.user.id
+        },
+        data: {
+          savedJobs: {
+            connect: {
+              id: input
+            }
+          }
+        }
+      });
+    }),
+  removeSavedJob: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ input, ctx }) => {
+      await ctx.prisma.candidate.update({
+        where: {
+          accountId: ctx.session.user.id
+        },
+        data: {
+          savedJobs: {
+            disconnect: {
+              id: input
+            }
+          }
+        }
+      });
+    }),
+  apply: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ input, ctx }) => {
+      await ctx.prisma.candidate.update({
+        where: { accountId: ctx.session.user.id },
+        data: {
+          applications: {
+            create: {
+              status: 'APPLIED',
+              jobId: input
+            }
+          }
+        }
+      });
+    }),
+  cancelApplication: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ input, ctx }) => {
+      await ctx.prisma.candidate.update({
+        where: { accountId: ctx.session.user.id },
+        data: {
+          applications: {
+            deleteMany: {
+              jobId: input
+            }
+          }
+        }
+      });
+    }),
+  comment: protectedProcedure
+    .input(
+      z.object({
+        comment: z.string(),
+        jobId: z.string()
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      await ctx.prisma.comment.create({
+        data: {
+          comment: input.comment,
+          job: {
+            connect: {
+              id: input.jobId
+            }
+          },
+          writtenBy: {
+            connect: {
+              accountId: ctx.session.user.id
+            }
+          }
+        }
+      });
     })
 });

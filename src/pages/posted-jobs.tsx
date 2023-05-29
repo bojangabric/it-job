@@ -7,11 +7,11 @@ const PostedJobs = () => {
   const { data } = useSession();
   const user = data?.user;
 
-  if (!user) return <></>;
+  if (user?.role !== 'POSLODAVAC') return <></>;
 
   return (
     <PostedJobsTable>
-      {user.postedJobs.map(job => (
+      {user.company.jobs.map(job => (
         <PostedJobRow key={job.id} {...job} />
       ))}
     </PostedJobsTable>

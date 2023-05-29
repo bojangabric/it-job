@@ -1,12 +1,18 @@
-import { Row } from 'components/tables/row';
-import { TableLayout } from 'components/tables/table-layout';
+import { AppliedRow } from 'components/tables/applied-row';
+import { TableLayoutApplied } from 'components/tables/table-layout-applied';
 import { type GetServerSidePropsContext } from 'next';
 import { getSession, useSession } from 'next-auth/react';
 import Link from 'next/link';
 
 export const AppliedJobs = () => {
   const { data } = useSession();
-  const appliedJobs = data?.user.appliedJobs;
+
+  if (data?.user.role !== 'KANDIDAT') return <></>;
+
+  const appliedJobs = data?.user.candidate.applications.map(application => ({
+    ...application.job,
+    status: application.status
+  }));
 
   if (!appliedJobs || appliedJobs.length === 0)
     return (
@@ -21,11 +27,11 @@ export const AppliedJobs = () => {
 
   return (
     <div className="mx-auto my-20 max-w-7xl shadow-md sm:rounded-lg">
-      <TableLayout>
-        {appliedJobs?.map(job => (
-          <Row {...job} key={job.id} />
+      <TableLayoutApplied>
+        {appliedJobs.map(job => (
+          <AppliedRow {...job} key={job.id} />
         ))}
-      </TableLayout>
+      </TableLayoutApplied>
     </div>
   );
 };

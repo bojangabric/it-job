@@ -5,7 +5,7 @@ export const CommentInput = ({ jobId }: { jobId: string }) => {
   const [comment, setComment] = useState('');
   const utils = api.useContext();
 
-  const { mutate: commentJob } = api.jobPosts.comment.useMutation({
+  const { mutate: commentJob } = api.candidate.comment.useMutation({
     onSuccess: () => utils.jobPosts.getById.invalidate(jobId)
   });
 

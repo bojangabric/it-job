@@ -3,19 +3,53 @@ import { api } from 'utils/api';
 
 export const JobApplicationButton = ({ jobId }: { jobId: string }) => {
   const { data, update } = useSession();
-  const { mutate: apply } = api.jobPosts.apply.useMutation({
+  const { mutate: apply } = api.candidate.apply.useMutation({
     onSuccess: update
   });
   const { mutate: cancelApplication } =
-    api.jobPosts.cancelApplication.useMutation({
+    api.candidate.cancelApplication.useMutation({
       onSuccess: update
     });
 
-  if (['POSLODAVAC', 'MODERATOR'].includes(data?.user.role || '')) return <></>;
+  if (!data)
+    return (
+      <div className="mt-10 text-center">
+        <button
+          disabled
+          onClick={() => apply(jobId)}
+          className="rounded-md bg-blue-700 px-5 py-3 text-base font-medium text-white focus:outline-none disabled:bg-gray-300 disabled:text-gray-500"
+        >
+          Prijavi se na oglas
+        </button>
+        <div className="mt-4 text-sm italic text-gray-700">
+          Morate se ulogovati prvo da biste se prijavili na posao.
+        </div>
+      </div>
+    );
 
-  const appliedJobsIds = data?.user.appliedJobs.map(jobPost => jobPost.id);
+  if (data.user.role !== 'KANDIDAT') return <></>;
 
-  if (appliedJobsIds?.includes(jobId)) {
+  const application = data.user.candidate.applications.find(
+    application => application.jobId === jobId
+  );
+
+  if (application?.status === 'REJECTED')
+    return (
+      <div className="mt-10 rounded bg-yellow-100 py-2 text-center text-yellow-700">
+        Kompanija je pogledala Vaš profil i nažalost niste prošli u sledeći
+        krug.
+      </div>
+    );
+
+  if (application?.status === 'ACCEPTED')
+    return (
+      <div className="mt-10 rounded bg-green-100 py-2 text-center text-green-700">
+        Čestitamo, kompanija je pogledala Vaš profil i prošli ste u sledeći
+        krug!
+      </div>
+    );
+
+  if (application?.status === 'APPLIED')
     return (
       <div className="mt-10 text-center">
         <button
@@ -26,22 +60,15 @@ export const JobApplicationButton = ({ jobId }: { jobId: string }) => {
         </button>
       </div>
     );
-  }
 
   return (
     <div className="mt-10 text-center">
       <button
-        disabled={!data}
         onClick={() => apply(jobId)}
         className="rounded-md bg-blue-700 px-5 py-3 text-base font-medium text-white focus:outline-none disabled:bg-gray-300 disabled:text-gray-500"
       >
         Prijavi se na oglas
       </button>
-      {!data && (
-        <div className="mt-4 text-sm italic text-gray-700">
-          Morate se ulogovati prvo da biste se prijavili na posao.
-        </div>
-      )}
     </div>
   );
 };

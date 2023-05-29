@@ -1,4 +1,4 @@
-import { type JobPost } from '@prisma/client';
+import { type Job } from '@prisma/client';
 import { useSession } from 'next-auth/react';
 import { api } from 'utils/api';
 import { transformExperienceToValue } from 'utils/transform-experience-to-value';
@@ -18,14 +18,14 @@ export const PostedJobRow = ({
   id,
   active,
   createdAt
-}: JobPost) => {
+}: Job) => {
   const { update } = useSession();
 
-  const { mutate: removeJob } = api.jobPosts.removeJobPost.useMutation({
+  const { mutate: removeJob } = api.company.removeJobPost.useMutation({
     onSuccess: update
   });
 
-  const { mutate: toggleJob } = api.jobPosts.toggleJob.useMutation({
+  const { mutate: toggleJob } = api.company.toggleJob.useMutation({
     onSuccess: update
   });
 

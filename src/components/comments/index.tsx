@@ -4,8 +4,10 @@ import { useSession } from 'next-auth/react';
 
 type Comment = CommentPrisma & {
   writtenBy: {
-    name: string | null;
-    image: string;
+    account: {
+      name: string | null;
+      image: string;
+    };
   };
 };
 
@@ -25,10 +27,10 @@ export const Comments = ({
           <div className="flex items-center space-x-4">
             <img
               className="h-12 w-12 rounded-full"
-              src={comment.writtenBy.image}
+              src={comment.writtenBy.account.image}
             />
             <span className="text-xl font-semibold">
-              {comment.writtenBy.name}
+              {comment.writtenBy.account.name}
             </span>
           </div>
           <div>{comment.comment}</div>

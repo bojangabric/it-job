@@ -13,12 +13,12 @@ export const JobCard = ({
     <div className="flex flex-col rounded-md bg-white p-6 shadow">
       <div className="flex items-center space-x-4">
         <div className="flex h-10 w-10 items-center">
-          <img className="" src={postedBy.image} />
+          <img className="" src={postedBy.account.image} />
         </div>
         <div className="relative w-full">
-          <div className="font-medium">{postedBy.name}</div>
+          <div className="font-medium">{postedBy.account.name}</div>
           <div className="text-sm font-medium text-gray-500">
-            {postedBy.location}
+            {postedBy.account.company?.location}
           </div>
           <SaveJobButton jobId={id} />
         </div>
