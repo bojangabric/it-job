@@ -36,22 +36,63 @@ enum Position {
     SYSTEM_ADMINISTRATOR
 }
 
-model User {
-    id          String    @id @default(cuid())
-    name        String
-    email       String    @unique
-    password    String
-    location    String?
-    role        Role
-    image       String    @default("/images/default_avatar.png")
-    postedJobs  JobPost[] @relation("postedJobs")
-    savedJobs   JobPost[] @relation("savedJobs")
-    appliedJobs JobPost[] @relation("appliedJobs")
-    comments    Comment[]
-    resume      String?
+enum APPLICATION_STATUS {
+    APPLIED
+    ACCEPTED
+    REJECTED
 }
 
-model JobPost {
+model Account {
+    id       String @id @default(cuid())
+    name     String
+    email    String @unique
+    password String
+    image    String @default("/images/default_avatar.png")
+    role     Role
+
+    candidate Candidate?
+    company   Company?
+
+    @@map("accounts")
+}
+
+model Application {
+    id     String             @id @default(cuid())
+    status APPLICATION_STATUS
+
+    candidate   Candidate @relation(fields: [candidateId], references: [id])
+    job         Job       @relation(fields: [jobId], references: [id])
+    candidateId String
+    jobId       String
+
+    @@map("applications")
+}
+
+model Candidate {
+    id        String    @id @default(cuid())
+    resume    String?
+    comments  Comment[]
+    savedJobs Job[]
+
+    account      Account?      @relation(fields: [accountId], references: [id])
+    accountId    String        @unique
+    applications Application[]
+
+    @@map("candidates")
+}
+
+model Company {
+    id       String @id @default(cuid())
+    location String
+    jobs     Job[]  @relation("jobs")
+
+    account   Account? @relation(fields: [accountId], references: [id])
+    accountId String   @unique
+
+    @@map("companies")
+}
+
+model Job {
     id          String         @id @default(cuid())
     active      Boolean
     title       String
@@ -60,23 +101,25 @@ model JobPost {
     experience  Experience
     position    Position
     type        EmploymentType
-    postedById  String
-    postedBy    User           @relation("postedJobs", fields: [postedById], references: [id])
-    savedJobs   User[]         @relation("savedJobs")
-    appliedJobs User[]         @relation("appliedJobs")
     comments    Comment[]
     createdAt   DateTime       @default(now())
 
-    @@map("jobPosts")
+    savedBy    Candidate[]
+    postedBy   Company       @relation("jobs", fields: [postedById], references: [id])
+    postedById String
+    applicants Application[]
+
+    @@map("jobs")
 }
 
 model Comment {
-    id        String  @id @default(cuid())
-    comment   String
-    jobId     JobPost @relation(fields: [jobPostId], references: [id], onDelete: Cascade)
-    writtenBy User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-    userId    String
-    jobPostId String
+    id      String @id @default(cuid())
+    comment String
+
+    writtenBy   Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+    candidateId String
+    job         Job       @relation(fields: [jobId], references: [id], onDelete: Cascade)
+    jobId       String
 
     @@map("comments")
 }
