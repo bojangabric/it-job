@@ -13,9 +13,11 @@ import { api } from 'utils/api';
 
 export const RegisterForm = () => {
   const [selectedRole, setSelectedRole] = useState<ROLE>('KANDIDAT');
+  const [error, setError] = useState(false);
   const { register, handleSubmit, getValues } = useForm<FORM_FIELDS>();
 
   const { mutate: registerCompany } = api.company.register.useMutation({
+    onError: () => setError(true),
     onSuccess: async () => {
       await signIn('credentials', {
         email: getValues('email'),
@@ -26,6 +28,7 @@ export const RegisterForm = () => {
   });
 
   const { mutate: registerCandidate } = api.candidate.register.useMutation({
+    onError: () => setError(true),
     onSuccess: async () => {
       await signIn('credentials', {
         email: getValues('email'),
@@ -65,6 +68,11 @@ export const RegisterForm = () => {
         </label>
       ))}
       <Button label="Registruj se" />
+      {error && (
+        <p className="rounded bg-red-200 px-4 py-3 text-red-600">
+          Ovaj email je već registrovan.
+        </p>
+      )}
     </form>
   );
 };
