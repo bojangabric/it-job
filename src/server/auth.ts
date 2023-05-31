@@ -184,12 +184,9 @@ export const authOptions: NextAuthOptions = {
         session.user.image = user.image;
         if (session.user.role === 'POSLODAVAC' && user.company) {
           session.user.company = user.company;
-          session.user.company.jobs = user.company.jobs;
         }
         if (session.user.role === 'KANDIDAT' && user.candidate) {
           session.user.candidate = user.candidate;
-          session.user.candidate.savedJobs = user.candidate.savedJobs;
-          session.user.candidate.applications = user.candidate.applications;
         }
       }
       return session;
@@ -208,13 +205,15 @@ export const authOptions: NextAuthOptions = {
         password: { label: 'Password', type: 'password' }
       },
       async authorize(credentials) {
+        if (!credentials) return null;
+
         const user = await prisma.account.findFirst({
           where: {
-            email: credentials?.email
+            email: credentials.email
           }
         });
 
-        if (!user || !credentials?.password) return null;
+        if (!user) return null;
 
         const verifyPassword = bcrypt.compareSync(
           credentials.password,

@@ -1,9 +1,12 @@
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
 import { ButtonLink } from 'components/button-link';
 import Testimonials from 'components/testimonials';
+import { useSession } from 'next-auth/react';
 import { Pattern } from 'svgs/pattern';
 
 const Home = () => {
+  const { data } = useSession();
+
   return (
     <>
       <div className="overflow-hidden bg-blue-500 text-white">
@@ -26,7 +29,13 @@ const Home = () => {
               text="Nađi posao"
             />
             <ButtonLink
-              link="/jobs"
+              link={
+                data?.user
+                  ? data?.user.role === 'POSLODAVAC'
+                    ? '/posted-jobs  '
+                    : '/jobs'
+                  : '?modal=Uloguj+se'
+              }
               className="bg-yellow-400 text-gray-800"
               text="Postavi oglas"
             />
@@ -93,7 +102,7 @@ const Home = () => {
           <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
             <ButtonLink
               className="bg-blue-700 text-white"
-              link="/"
+              link={data ? '/profile  ' : '?modal=Uloguj+se'}
               text="Postavi CV"
             />
           </div>

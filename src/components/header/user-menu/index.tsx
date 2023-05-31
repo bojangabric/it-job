@@ -23,8 +23,8 @@ const MenuOptions = {
   ],
   MODERATOR: [
     {
-      label: 'Vaši oglasi',
-      href: '/posted-jobs'
+      label: 'Neodobreni oglasi',
+      href: '/unapproved-jobs'
     },
     { label: 'Moj profil', href: '/profile' }
   ]

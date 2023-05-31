@@ -140,6 +140,9 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ closeModal }, ref) => {
           <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Oglas</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+              <p className="pb-2 italic text-gray-600">
+                Mozete koristiti Markdown za formatiranje teksta
+              </p>
               <textarea
                 value={values.description}
                 onChange={e =>
