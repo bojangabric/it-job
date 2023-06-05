@@ -1,6 +1,7 @@
 import { PaperClipIcon } from '@heroicons/react/24/solid';
 import { FieldRow } from 'components/profile/field-row';
 import { type GetServerSidePropsContext } from 'next';
+import { getSession } from 'next-auth/react';
 import { api } from 'utils/api';
 
 const CandidateProfile = ({ profileId }: { profileId: string }) => {
@@ -45,7 +46,18 @@ const CandidateProfile = ({ profileId }: { profileId: string }) => {
 
 export default CandidateProfile;
 
-export function getServerSideProps(context: GetServerSidePropsContext) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/?modal=Uloguj+se',
+        permanent: false
+      }
+    };
+  }
+
   return {
     props: { profileId: context.params?.id }
   };
