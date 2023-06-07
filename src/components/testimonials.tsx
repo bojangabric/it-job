@@ -1,7 +1,19 @@
 import { Logos } from 'components/logos';
 import TestimonialsData from 'data/testimonials.json';
 
-const Testimonial = ({ name, image, company, testimonial }) => (
+type TestimonialProps = {
+  name: string;
+  image: string;
+  company: string;
+  testimonial: string;
+};
+
+const Testimonial = ({
+  name,
+  image,
+  company,
+  testimonial
+}: TestimonialProps) => (
   <div className="flex flex-col space-y-4 rounded-md border-t-4 border-blue-500 bg-white p-6 shadow">
     <p className="flex-grow">{testimonial}</p>
     <div className="flex items-center">
