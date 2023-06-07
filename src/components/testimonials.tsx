@@ -33,7 +33,7 @@ const Testimonials = () => {
     <div className="overflow-hidden bg-gray-100">
       <div className="my-32 mx-auto max-w-5xl space-y-16">
         <div className="text-center text-3xl font-bold">
-          Veruju nam više od 1000 kompanija
+          Veruje nam više od 1000 kompanija
         </div>
         <div className="grid grid-cols-3 gap-10">
           {TestimonialsData.map(({ id, name, image, company, testimonial }) => (
