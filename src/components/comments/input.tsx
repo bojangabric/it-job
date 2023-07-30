@@ -12,6 +12,7 @@ export const CommentInput = ({ jobId }: { jobId: string }) => {
   const submitForm = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     commentJob({ comment, jobId });
+    setComment('');
   };
 
   return (
