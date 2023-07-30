@@ -12,7 +12,7 @@ const JobPost = ({ jobId }: { jobId: string }) => {
   return (
     <div className="py-20">
       <div className="mx-auto max-w-2xl">
-        <div className="pb-20 text-center">
+        <div className="pb-10 text-center">
           <img className="mx-auto h-16" src={job.postedBy.account.image} />
           <div>
             <h1 className="mt-10 text-5xl font-bold">{job.title}</h1>
