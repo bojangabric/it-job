@@ -8,7 +8,7 @@ import { transformTypeToValue } from 'utils/transform-type-to-value';
 const Status = ({ status }: { status: APPLICATION_STATUS }) => {
   if (status === 'APPLIED')
     return (
-      <div className="rounded-full bg-yellow-200 text-center font-medium text-yellow-700">
+      <div className="rounded-full bg-yellow-100 text-center font-medium text-yellow-700">
         Prijavljen
       </div>
     );
@@ -21,7 +21,7 @@ const Status = ({ status }: { status: APPLICATION_STATUS }) => {
     );
 
   return (
-    <div className="rounded-full bg-green-100 text-center font-medium text-green-600">
+    <div className="rounded-full bg-green-100 text-center font-medium text-green-700">
       Prihvaćen
     </div>
   );
@@ -42,7 +42,7 @@ export const AppliedRow = ({
         scope="row"
         className="flex items-center whitespace-nowrap px-6 py-4 text-gray-900"
       >
-        <img className="h-10 w-10" src={postedBy.account.image} />
+        <img className="h-10 w-auto" src={postedBy.account.image} />
         <div className="pl-3">
           <div className="text-base font-semibold">{title}</div>
           <div className="font-normal text-gray-500">
