@@ -1,8 +1,9 @@
 import { PaperClipIcon } from '@heroicons/react/24/solid';
 import { FieldRow } from 'components/profile/field-row';
 import { type GetServerSidePropsContext } from 'next';
-import { getSession } from 'next-auth/react';
 import { api } from 'utils/api';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from 'server/auth';
 
 const CandidateProfile = ({ profileId }: { profileId: string }) => {
   const { data: candidate } = api.candidate.getById.useQuery(profileId);
@@ -47,7 +48,7 @@ const CandidateProfile = ({ profileId }: { profileId: string }) => {
 export default CandidateProfile;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getSession(context);
+  const session = await getServerSession(context.req, context.res, authOptions);
 
   if (!session) {
     return {

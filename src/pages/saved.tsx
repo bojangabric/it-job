@@ -1,8 +1,10 @@
 import { Row } from 'components/tables/row';
 import { TableLayout } from 'components/tables/table-layout';
 import { type GetServerSidePropsContext } from 'next';
-import { getSession, useSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
+import { authOptions } from 'server/auth';
 
 export const SavedJobs = () => {
   const { data } = useSession();
@@ -36,7 +38,7 @@ export const SavedJobs = () => {
 export default SavedJobs;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getSession(context);
+  const session = await getServerSession(context.req, context.res, authOptions);
 
   if (!session) {
     return {

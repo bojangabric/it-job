@@ -1,8 +1,10 @@
 import { type GetServerSidePropsContext } from 'next';
-import { getSession, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { api } from 'utils/api';
 import { UnapprovedJobRow } from 'components/unapproved-job-row';
 import { UnapprovedJobsTable } from 'components/unapproved-jobs-table';
+import { getServerSession } from 'next-auth';
+import { authOptions } from 'server/auth';
 
 const UnapprovedJobs = () => {
   const { data } = useSession();
@@ -23,9 +25,9 @@ const UnapprovedJobs = () => {
 export default UnapprovedJobs;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getSession(context);
+  const session = await getServerSession(context.req, context.res, authOptions);
 
-  if (!session || session.user.role !== 'MODERATOR') {
+  if (!session) {
     return {
       redirect: {
         destination: '/?modal=Login',

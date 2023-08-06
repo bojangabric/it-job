@@ -1,7 +1,9 @@
 import { type GetServerSidePropsContext } from 'next';
-import { getSession, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { PostedJobsTable } from 'components/posted-jobs-table';
 import { PostedJobRow } from 'components/posted-job-row';
+import { getServerSession } from 'next-auth';
+import { authOptions } from 'server/auth';
 
 const PostedJobs = () => {
   const { data } = useSession();
@@ -21,7 +23,7 @@ const PostedJobs = () => {
 export default PostedJobs;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getSession(context);
+  const session = await getServerSession(context.req, context.res, authOptions);
 
   if (!session) {
     return {
