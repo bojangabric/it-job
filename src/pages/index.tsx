@@ -1,7 +1,10 @@
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
 import { ButtonLink } from 'components/button-link';
 import Testimonials from 'components/testimonials';
+import { type GetServerSidePropsContext } from 'next';
+import { getServerSession } from 'next-auth';
 import { useSession } from 'next-auth/react';
+import { authOptions } from 'server/auth';
 import { Pattern } from 'svgs/pattern';
 
 const Home = () => {
@@ -109,3 +112,13 @@ const Home = () => {
 };
 
 export default Home;
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getServerSession(context.req, context.res, authOptions);
+
+  return {
+    props: {
+      session
+    }
+  };
+}
