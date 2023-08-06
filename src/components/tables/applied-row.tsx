@@ -9,20 +9,20 @@ const Status = ({ status }: { status: APPLICATION_STATUS }) => {
   if (status === 'APPLIED')
     return (
       <div className="rounded-full bg-yellow-100 text-center font-medium text-yellow-700">
-        Prijavljen
+        Applied
       </div>
     );
 
   if (status === 'REJECTED')
     return (
       <div className="rounded-full bg-red-100 text-center font-medium text-red-600">
-        Odbijen
+        Rejected
       </div>
     );
 
   return (
     <div className="rounded-full bg-green-100 text-center font-medium text-green-700">
-      Prihvaćen
+      Accepted
     </div>
   );
 };
@@ -61,7 +61,7 @@ export const AppliedRow = ({
           href={`/jobs/${id}`}
           className="text-blue-500 hover:text-blue-700"
         >
-          Vidi oglas
+          View job
         </Link>
       </td>
     </tr>

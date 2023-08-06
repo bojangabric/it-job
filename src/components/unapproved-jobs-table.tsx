@@ -11,13 +11,13 @@ export const UnapprovedJobsTable = ({ children }: TableLayoutProps) => {
         <thead className="bg-gray-50 text-xs uppercase text-gray-700">
           <tr>
             <th scope="col" className="px-6 py-3 text-center">
-              Odobren
+              Approved
             </th>
             <th scope="col" className="px-6 py-3">
-              Pozicija
+              Position
             </th>
             <th scope="col" className="px-6 py-3">
-              Datum objave
+              Posted
             </th>
             <th scope="col" className="px-6 py-3"></th>
           </tr>

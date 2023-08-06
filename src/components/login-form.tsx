@@ -33,17 +33,17 @@ export const LoginForm = () => {
         />
       </label>
       <label className="block">
-        Sifra
+        Password
         <input
           type="password"
           className="block w-full rounded-md border border-gray-300 p-3"
           {...register('password', { required: true })}
         />
       </label>
-      <Button label="Uloguj se" />
+      <Button label="Login" />
       {showError && (
         <p className="rounded bg-red-200 px-2 py-2 text-red-600">
-          Pogresan email ili sifra.
+          Wrong email or password.
         </p>
       )}
     </form>

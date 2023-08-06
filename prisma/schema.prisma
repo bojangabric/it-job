@@ -8,13 +8,13 @@ datasource db {
 }
 
 enum Role {
-    KANDIDAT
-    POSLODAVAC
+    CANDIDATE
+    COMPANY
     MODERATOR
 }
 
 enum EmploymentType {
-    PRAKSA
+    INTERNSHIP
     PART_TIME
     FULL_TIME
     CONTRACT

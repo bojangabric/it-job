@@ -54,7 +54,7 @@ export const SearchBar = () => {
         />
         <Input
           icon={<MapPinIcon />}
-          placeholder="Mesto"
+          placeholder="Location"
           onChange={setLocation}
           value={location}
         />
@@ -62,7 +62,7 @@ export const SearchBar = () => {
           onClick={search}
           className="rounded-l-none rounded-r-md bg-blue-500 !py-5 !px-12 text-center text-white"
         >
-          Pretrazi
+          Search
         </button>
       </form>
     </div>

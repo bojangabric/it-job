@@ -23,11 +23,11 @@ export const Header = () => {
             <UserMenu />
           ) : (
             <>
-              <Modal buttonName="Uloguj se">
+              <Modal buttonName="Login">
                 <LoginForm />
               </Modal>
               /
-              <Modal buttonName="Registruj se">
+              <Modal buttonName="Register">
                 <RegisterForm />
               </Modal>
             </>

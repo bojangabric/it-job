@@ -14,7 +14,7 @@ export const JobsList = () => {
       {!jobPosts || jobPosts.length === 0 ? (
         <div className="col-span-3 mx-auto mt-10 text-center">
           <p className="text-3xl font-semibold">
-            Nema nikakvih oglasa za ovu pretragu.
+            No results for these filters.
           </p>
           <img src="/images/no_results.png" />
         </div>

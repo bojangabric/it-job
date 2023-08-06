@@ -13,7 +13,7 @@ const CandidateProfile = ({ profileId }: { profileId: string }) => {
     <div className="mx-auto max-w-3xl py-10">
       <div className="py-5">
         <h3 className="text-lg font-medium leading-6 text-gray-900">
-          Informacije o kandidatu
+          Candidate info
         </h3>
       </div>
       <FieldRow fieldName="Slika">
@@ -35,7 +35,7 @@ const CandidateProfile = ({ profileId }: { profileId: string }) => {
                 {candidate.resume.split('/').pop()}
               </a>
             ) : (
-              <>Kandidat nije dodao CV</>
+              <> Candidate didn&apos;t upload CV</>
             )}
           </span>
         </div>
@@ -52,7 +52,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (!session) {
     return {
       redirect: {
-        destination: '/?modal=Uloguj+se',
+        destination: '/?modal=Login',
         permanent: false
       }
     };

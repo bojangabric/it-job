@@ -1,16 +1,24 @@
 import Link from 'next/link';
 import data from './data.json';
 import { useFilters } from './use-filters';
+import {
+  type EmploymentType,
+  type Experience,
+  type Position
+} from '@prisma/client';
 
 export const Filter = () => {
   const { addToUrl, removeFromUrl, activeFilters } = useFilters();
 
   const checkIfChecked = (name: string, option: string) => {
-    const { experience, type, position } = activeFilters;
+    const { experience, employment, position } = activeFilters;
 
-    if (name === 'Iskustvo' && experience) return experience.includes(option);
-    if (name === 'Tip' && type) return type.includes(option);
-    if (name === 'Pozicija' && position) return position.includes(option);
+    if (name === 'Experience' && experience)
+      return experience.includes(option as Experience);
+    if (name === 'Employment' && employment)
+      return employment.includes(option as EmploymentType);
+    if (name === 'Position' && position)
+      return position.includes(option as Position);
 
     return false;
   };
@@ -29,16 +37,22 @@ export const Filter = () => {
 
               return (
                 <li key={option}>
-                  <Link href={url} className="flex items-center">
+                  <Link
+                    href={url}
+                    className="inline-flex cursor-pointer items-center"
+                  >
                     <input
                       readOnly
                       id={option}
                       type="checkbox"
-                      className="rounded border-gray-300 text-blue-600 shadow-sm"
+                      className="cursor-pointer rounded border-gray-300 text-blue-600 shadow-sm"
                       value={option}
                       checked={checked}
                     />
-                    <label htmlFor={option} className="ml-2 text-gray-600">
+                    <label
+                      htmlFor={option}
+                      className="ml-2 cursor-pointer text-gray-600"
+                    >
                       {option}
                     </label>
                   </Link>

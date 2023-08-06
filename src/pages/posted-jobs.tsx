@@ -7,7 +7,7 @@ const PostedJobs = () => {
   const { data } = useSession();
   const user = data?.user;
 
-  if (user?.role !== 'POSLODAVAC') return <></>;
+  if (user?.role !== 'COMPANY') return <></>;
 
   return (
     <PostedJobsTable>
@@ -26,7 +26,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (!session) {
     return {
       redirect: {
-        destination: '/?modal=Uloguj+se',
+        destination: '/?modal=Login',
         permanent: false
       }
     };

@@ -11,7 +11,7 @@ export const SaveJobButton = ({ jobId }: { jobId: string }) => {
     onSuccess: update
   });
 
-  if (data?.user.role !== 'KANDIDAT') return <></>;
+  if (data?.user.role !== 'CANDIDATE') return <></>;
 
   const savedJobsIds = data.user.candidate.savedJobs.map(jobPost => jobPost.id);
 

@@ -1,7 +1,7 @@
 import { PaperClipIcon } from '@heroicons/react/24/solid';
 import { useSession } from 'next-auth/react';
 import { api } from 'utils/api';
-import { handleFileUpload } from 'utils/upload/handle-upload-file';
+import { handleFileUpload } from 'utils/handle-upload-file';
 
 export const UpdateResume = ({ resume }: { resume: string }) => {
   const { update } = useSession();
@@ -25,7 +25,7 @@ export const UpdateResume = ({ resume }: { resume: string }) => {
       </div>
       <div className="ml-4 flex-shrink-0">
         <label className="cursor-pointer font-medium text-blue-600 hover:text-blue-500">
-          <span>Novi CV</span>
+          <span>Update CV</span>
           <input
             type="file"
             className="hidden"

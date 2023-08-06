@@ -20,7 +20,7 @@ export const companyRouter = createTRPCRouter({
       await ctx.prisma.account.create({
         data: {
           name: input.name,
-          role: 'POSLODAVAC',
+          role: 'COMPANY',
           email: input.email,
           password: await bcrypt.hash(input.password, 10),
           company: {
@@ -72,7 +72,7 @@ export const companyRouter = createTRPCRouter({
           'SENIOR',
           'LEAD'
         ]),
-        type: z.enum(['PRAKSA', 'PART_TIME', 'FULL_TIME', 'CONTRACT']),
+        type: z.enum(['INTERNSHIP', 'PART_TIME', 'FULL_TIME', 'CONTRACT']),
         position: z.enum([
           'FRONT_END_DEVELOPER',
           'BACK_END_DEVELOPER',

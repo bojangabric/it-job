@@ -45,7 +45,7 @@ declare module 'next-auth' {
     user:
       | {
           id: string;
-          role: 'KANDIDAT';
+          role: 'CANDIDATE';
           name: string;
           email: string;
           image: string;
@@ -68,7 +68,7 @@ declare module 'next-auth' {
         }
       | {
           id: string;
-          role: 'POSLODAVAC';
+          role: 'COMPANY';
           name: string;
           email: string;
           image: string;
@@ -182,10 +182,10 @@ export const authOptions: NextAuthOptions = {
         session.user.role = user.role;
         session.user.id = user.id;
         session.user.image = user.image;
-        if (session.user.role === 'POSLODAVAC' && user.company) {
+        if (session.user.role === 'COMPANY' && user.company) {
           session.user.company = user.company;
         }
-        if (session.user.role === 'KANDIDAT' && user.candidate) {
+        if (session.user.role === 'CANDIDATE' && user.candidate) {
           session.user.candidate = user.candidate;
         }
       }

@@ -6,27 +6,27 @@ import { UserMenuItem } from './user-menu-item';
 import { signOut } from 'next-auth/react';
 
 const MenuOptions = {
-  KANDIDAT: [
+  CANDIDATE: [
     {
-      label: 'Oglasi na koje ste se prijavili',
+      label: 'Applied jobs',
       href: '/applied'
     },
-    { label: 'Sačuvani oglasi', type: 'link', href: '/saved' },
-    { label: 'Moj profil', type: 'link', href: '/profile' }
+    { label: 'Saved jobs', type: 'link', href: '/saved' },
+    { label: 'My profile', type: 'link', href: '/profile' }
   ],
-  POSLODAVAC: [
+  COMPANY: [
     {
-      label: 'Vaši oglasi',
+      label: 'Posted jobs',
       href: '/posted-jobs'
     },
-    { label: 'Moj profil', type: 'link', href: '/profile' }
+    { label: 'My profile', type: 'link', href: '/profile' }
   ],
   MODERATOR: [
     {
-      label: 'Neodobreni oglasi',
+      label: 'Unapproved jobs',
       href: '/unapproved-jobs'
     },
-    { label: 'Moj profil', href: '/profile' }
+    { label: 'My profile', href: '/profile' }
   ]
 };
 
@@ -69,7 +69,7 @@ export default function UserMenu() {
             </div>
             <div className="px-1 py-1">
               <UserMenuItem
-                label="Odjavi se"
+                label="Log out"
                 onClick={() => void signOut()}
                 type="button"
               />

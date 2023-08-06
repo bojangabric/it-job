@@ -12,10 +12,10 @@ export const CandidatesTable = forwardRef<
         <thead className="bg-gray-50 text-xs uppercase text-gray-700">
           <tr>
             <th scope="col" className="px-6 py-3">
-              Kandidati
+              Candidates
             </th>
             <th scope="col" className="px-6 py-3">
-              Prijavljen
+              Applied
             </th>
             <th scope="col" className="px-6 py-3"></th>
             <th scope="col" className="px-6 py-3"></th>

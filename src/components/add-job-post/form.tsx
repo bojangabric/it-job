@@ -26,7 +26,7 @@ interface FieldTypes {
 
 const Form = forwardRef<HTMLFormElement, FormProps>(({ closeModal }, ref) => {
   const [values, setValues] = useState<FieldTypes>({
-    active: false,
+    active: true,
     title: '',
     position: Position.FULL_STACK_DEVELOPER,
     experience: Experience.JUNIOR,
@@ -52,13 +52,13 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ closeModal }, ref) => {
     >
       <div className="px-4 py-5 sm:px-6">
         <h3 className="text-lg font-medium leading-6 text-gray-900">
-          Dodajte novi oglas
+          Job post
         </h3>
       </div>
       <div className="border-t border-gray-200">
         <dl>
           <div className="items-center px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">Aktivan</dt>
+            <dt className="text-sm font-medium text-gray-500">Active</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               <Toggle
                 enabled={values.active}
@@ -69,7 +69,7 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ closeModal }, ref) => {
             </dd>
           </div>
           <div className="items-center px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">Ime oglasa</dt>
+            <dt className="text-sm font-medium text-gray-500">Title</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               <input
                 type="text"
@@ -81,7 +81,7 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ closeModal }, ref) => {
             </dd>
           </div>
 
-          <FieldLayout fieldName="Pozicija">
+          <FieldLayout fieldName="Position">
             <ListBox
               options={Object.values(Position).map(position => ({
                 key: position,
@@ -93,7 +93,7 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ closeModal }, ref) => {
             />
           </FieldLayout>
 
-          <FieldLayout fieldName="Iskustvo">
+          <FieldLayout fieldName="Experience">
             <ListBox
               options={Object.values(Experience).map(experience => ({
                 key: experience,
@@ -105,7 +105,7 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ closeModal }, ref) => {
             />
           </FieldLayout>
 
-          <FieldLayout fieldName="Tip zaposlenja">
+          <FieldLayout fieldName="Employment type">
             <ListBox
               options={Object.values(EmploymentType).map(type => ({
                 key: type,
@@ -117,7 +117,7 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ closeModal }, ref) => {
             />
           </FieldLayout>
 
-          <FieldLayout fieldName="Tehnologije">
+          <FieldLayout fieldName="Skills">
             <ListBoxArray
               options={[
                 'C#',
@@ -138,10 +138,10 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ closeModal }, ref) => {
           </FieldLayout>
 
           <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">Oglas</dt>
+            <dt className="text-sm font-medium text-gray-500">Description</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               <p className="pb-2 italic text-gray-600">
-                Mozete koristiti Markdown za formatiranje teksta
+                You can use Markdown to format text
               </p>
               <textarea
                 value={values.description}
@@ -162,13 +162,13 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ closeModal }, ref) => {
           type="button"
           className="px-4 py-2 focus:outline-none"
         >
-          Prekini
+          Cancel
         </button>
         <button
           type="submit"
           className="rounded bg-blue-500 px-4 py-2 font-medium text-white hover:bg-blue-600 focus:outline-none"
         >
-          Napravi novi oglas
+          Create job post
         </button>
       </div>
     </form>

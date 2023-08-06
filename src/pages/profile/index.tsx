@@ -10,11 +10,11 @@ const Profile = () => {
 
   if (!user) return <></>;
 
-  if (user.role === 'KANDIDAT') {
+  if (user.role === 'CANDIDATE') {
     return <CandidateProfile user={user} />;
   }
 
-  if (user.role === 'POSLODAVAC') {
+  if (user.role === 'COMPANY') {
     return <CompanyProfile user={user} />;
   }
 
@@ -31,7 +31,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (!session) {
     return {
       redirect: {
-        destination: '/?modal=Uloguj+se',
+        destination: '/?modal=Login',
         permanent: false
       }
     };

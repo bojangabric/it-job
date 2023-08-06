@@ -60,10 +60,10 @@ export const CandidateRow = ({
           </div>
         )}
         {status === 'ACCEPTED' && (
-          <span className="text-green-600">Kandidat prihvaćen</span>
+          <span className="text-green-600">Candidate accepted</span>
         )}
         {status === 'REJECTED' && (
-          <span className="text-red-600">Kandidat odbijen</span>
+          <span className="text-red-600">Candidate rejected</span>
         )}
       </td>
     </tr>

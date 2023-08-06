@@ -32,15 +32,15 @@ function convertToString(value: string | string[] | undefined) {
 export function useFilters() {
   const { query } = useRouter();
 
-  const experience = query.Iskustvo;
-  const type = query.Tip;
-  const position = query.Pozicija;
+  const experience = query.Experience;
+  const employment = query.Employment;
+  const position = query.Position;
   const title = query.Title;
   const location = query.Location;
 
   const activeFilters = {
     experience: convertToArray(experience) as Experience[],
-    type: convertToArray(type) as EmploymentType[],
+    employment: convertToArray(employment) as EmploymentType[],
     position: convertToArray(position) as Position[],
     title: convertToString(title),
     location: convertToString(location)
@@ -50,7 +50,9 @@ export function useFilters() {
     experience: convertToArray(experience)?.map(
       transformToEnum
     ) as Experience[],
-    type: convertToArray(type)?.map(transformToEnum) as EmploymentType[],
+    employment: convertToArray(employment)?.map(
+      transformToEnum
+    ) as EmploymentType[],
     position: convertToArray(position)?.map(transformToEnum) as Position[],
     title: convertToString(title),
     location: convertToString(location)
@@ -58,9 +60,9 @@ export function useFilters() {
 
   let url = '?';
 
-  if (experience) url += `Iskustvo=${experience.toString()}&`;
-  if (type) url += `Tip=${type.toString()}&`;
-  if (position) url += `Pozicija=${position.toString()}&`;
+  if (experience) url += `Experience=${experience.toString()}&`;
+  if (employment) url += `Employment=${employment.toString()}&`;
+  if (position) url += `Position=${position.toString()}&`;
   if (title) url += `Title=${title.toString()}&`;
   if (location) url += `Location=${location.toString()}&`;
 

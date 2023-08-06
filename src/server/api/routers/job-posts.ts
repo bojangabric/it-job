@@ -10,8 +10,8 @@ export const jobPostsRouter = createTRPCRouter({
             .enum(['STUDENT', 'JUNIOR', 'MID_LEVEL', 'SENIOR', 'LEAD'])
             .array()
             .optional(),
-          type: z
-            .enum(['PRAKSA', 'PART_TIME', 'FULL_TIME', 'CONTRACT'])
+          employment: z
+            .enum(['INTERNSHIP', 'PART_TIME', 'FULL_TIME', 'CONTRACT'])
             .array()
             .optional(),
           position: z
@@ -55,7 +55,7 @@ export const jobPostsRouter = createTRPCRouter({
             in: input?.experience
           },
           type: {
-            in: input?.type
+            in: input?.employment
           },
           position: {
             in: input?.position

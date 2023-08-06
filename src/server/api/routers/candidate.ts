@@ -19,7 +19,7 @@ export const candidateRouter = createTRPCRouter({
       await ctx.prisma.account.create({
         data: {
           name: input.name,
-          role: 'KANDIDAT',
+          role: 'CANDIDATE',
           email: input.email,
           password: await bcrypt.hash(input.password, 10),
           candidate: {

@@ -19,15 +19,15 @@ export const JobApplicationButton = ({ jobId }: { jobId: string }) => {
           onClick={() => apply(jobId)}
           className="rounded-md bg-blue-700 px-5 py-3 text-base font-medium text-white focus:outline-none disabled:bg-gray-300 disabled:text-gray-500"
         >
-          Prijavi se na oglas
+          Apply
         </button>
         <div className="mt-4 text-sm italic text-gray-700">
-          Morate se ulogovati prvo da biste se prijavili na posao.
+          You must log in first to apply for a job.
         </div>
       </div>
     );
 
-  if (data.user.role !== 'KANDIDAT') return <></>;
+  if (data.user.role !== 'CANDIDATE') return <></>;
 
   const application = data.user.candidate.applications.find(
     application => application.jobId === jobId
@@ -36,16 +36,16 @@ export const JobApplicationButton = ({ jobId }: { jobId: string }) => {
   if (application?.status === 'REJECTED')
     return (
       <div className="mt-10 rounded bg-yellow-100 py-2 text-center text-yellow-700">
-        Kompanija je pogledala Vaš profil i nažalost niste prošli u sledeći
-        krug.
+        {application.job.postedBy.account.name} looked at your profile and
+        unfortunately you didn&apos;t make it to the next round.
       </div>
     );
 
   if (application?.status === 'ACCEPTED')
     return (
       <div className="mt-10 rounded bg-green-100 py-2 text-center text-green-700">
-        Čestitamo, kompanija je pogledala Vaš profil i prošli ste u sledeći
-        krug!
+        Congratulations, {application.job.postedBy.account.name} has viewed your
+        profile and you have moved on to the next round!
       </div>
     );
 
@@ -56,7 +56,7 @@ export const JobApplicationButton = ({ jobId }: { jobId: string }) => {
           onClick={() => cancelApplication(jobId)}
           className="rounded-md bg-red-200 px-5 py-3 text-base font-medium text-red-600 focus:outline-none disabled:bg-gray-300 disabled:text-gray-500"
         >
-          Odjavi se
+          Cancel application
         </button>
       </div>
     );
@@ -67,7 +67,7 @@ export const JobApplicationButton = ({ jobId }: { jobId: string }) => {
         onClick={() => apply(jobId)}
         className="rounded-md bg-blue-700 px-5 py-3 text-base font-medium text-white focus:outline-none disabled:bg-gray-300 disabled:text-gray-500"
       >
-        Prijavi se na oglas
+        Apply to job
       </button>
     </div>
   );

@@ -28,7 +28,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (!session || session.user.role !== 'MODERATOR') {
     return {
       redirect: {
-        destination: '/?modal=Uloguj+se',
+        destination: '/?modal=Login',
         permanent: false
       }
     };

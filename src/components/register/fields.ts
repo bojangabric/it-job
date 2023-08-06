@@ -6,11 +6,11 @@ export type FORM_FIELDS = {
 };
 
 export const FIELDS = {
-  KANDIDAT: [
+  CANDIDATE: [
     {
       name: 'name',
       type: 'text',
-      label: 'Ime i prezime'
+      label: 'Name'
     },
     {
       name: 'email',
@@ -20,33 +20,33 @@ export const FIELDS = {
     {
       name: 'password',
       type: 'password',
-      label: 'Sifra'
+      label: 'Password'
     }
   ] as const,
-  POSLODAVAC: [
+  COMPANY: [
     {
       name: 'name',
       type: 'text',
-      label: 'Ime kompanije'
-    },
-    {
-      name: 'email',
-      type: 'email',
-      label: 'Email'
-    },
-    {
-      name: 'password',
-      type: 'password',
-      label: 'Sifra'
+      label: 'Name'
     },
     {
       name: 'location',
       type: 'text',
-      label: 'Lokacija kompanije'
+      label: 'Location'
+    },
+    {
+      name: 'email',
+      type: 'email',
+      label: 'Email'
+    },
+    {
+      name: 'password',
+      type: 'password',
+      label: 'Password'
     }
   ] as const
 };
 
-export const ROLES = ['KANDIDAT', 'POSLODAVAC'] as const;
+export const ROLES = ['CANDIDATE', 'COMPANY'] as const;
 
 export type ROLE = (typeof ROLES)[number];

@@ -12,7 +12,7 @@ import {
 import { api } from 'utils/api';
 
 export const RegisterForm = () => {
-  const [selectedRole, setSelectedRole] = useState<ROLE>('KANDIDAT');
+  const [selectedRole, setSelectedRole] = useState<ROLE>('CANDIDATE');
   const [error, setError] = useState(false);
   const { register, handleSubmit, getValues } = useForm<FORM_FIELDS>();
 
@@ -39,7 +39,7 @@ export const RegisterForm = () => {
   });
 
   const onSubmit: SubmitHandler<FORM_FIELDS> = data => {
-    if (selectedRole === 'KANDIDAT')
+    if (selectedRole === 'CANDIDATE')
       registerCandidate({
         ...data
       });
@@ -51,9 +51,9 @@ export const RegisterForm = () => {
 
   return (
     <form className="space-y-6" method="POST" onSubmit={handleSubmit(onSubmit)}>
-      <p className="-mb-2 text-center font-medium">Vi ste:</p>
+      <p className="-mb-2 text-center font-medium">You are:</p>
       <RadioButton
-        values={['KANDIDAT', 'POSLODAVAC']}
+        values={['CANDIDATE', 'COMPANY']}
         selected={selectedRole}
         onChange={setSelectedRole}
       />
@@ -67,10 +67,10 @@ export const RegisterForm = () => {
           />
         </label>
       ))}
-      <Button label="Registruj se" />
+      <Button label="Register" />
       {error && (
         <p className="rounded bg-red-200 px-4 py-3 text-red-600">
-          Ovaj email je već registrovan.
+          This email is already registered.
         </p>
       )}
     </form>

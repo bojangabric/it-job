@@ -44,7 +44,7 @@ export const JobCard = ({
           href={`/jobs/${id}`}
           className="font-medium text-blue-600 transition hover:text-blue-800"
         >
-          Prijavi se
+          Apply
         </a>
       </div>
     </div>

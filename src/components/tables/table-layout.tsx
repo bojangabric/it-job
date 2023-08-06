@@ -10,19 +10,19 @@ export const TableLayout = ({ children }: TableLayoutProps) => {
       <thead className="bg-gray-50 text-xs uppercase text-gray-700">
         <tr>
           <th scope="col" className="px-6 py-3">
-            Kompanija
+            Company
           </th>
           <th scope="col" className="px-6 py-3">
-            Pozicija
+            Position
           </th>
           <th scope="col" className="px-6 py-3">
-            Iskustvo
+            Experience
           </th>
           <th scope="col" className="px-6 py-3">
-            Tip zaposlenja
+            Employment type
           </th>
           <th scope="col" className="px-6 py-3">
-            Veštine
+            Skills
           </th>
           <th scope="col" className="px-6 py-3"></th>
         </tr>

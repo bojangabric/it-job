@@ -7,7 +7,7 @@ import Link from 'next/link';
 export const AppliedJobs = () => {
   const { data } = useSession();
 
-  if (data?.user.role !== 'KANDIDAT') return <></>;
+  if (data?.user.role !== 'CANDIDATE') return <></>;
 
   const appliedJobs = data?.user.candidate.applications.map(application => ({
     ...application.job,
@@ -17,9 +17,9 @@ export const AppliedJobs = () => {
   if (!appliedJobs || appliedJobs.length === 0)
     return (
       <div className="mx-auto my-20 max-w-2xl justify-center rounded bg-blue-50 px-8 py-4 text-lg">
-        Niste se prijavili ni na jedan posao za sada. Pogledajte sve{' '}
+        You haven&apos;t applied to any jobs yet. View all{' '}
         <Link href="/jobs" className="text-blue-600">
-          otvorene pozicije
+          open positions
         </Link>
         .
       </div>
@@ -44,7 +44,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (!session) {
     return {
       redirect: {
-        destination: '/?modal=Uloguj+se',
+        destination: '/?modal=Login',
         permanent: false
       }
     };

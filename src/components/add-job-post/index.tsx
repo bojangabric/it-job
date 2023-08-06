@@ -19,7 +19,7 @@ export const AddJobPost = () => {
         onClick={openModal}
         className="ml-auto block rounded bg-blue-500 px-4 py-2 text-white"
       >
-        Dodajte oglas
+        Create job post
       </button>
 
       <Transition appear show={isOpen} as={Fragment}>

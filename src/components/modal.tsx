@@ -21,7 +21,10 @@ export const Modal = ({ buttonName, children }: ModalProps) => {
     setIsOpen(true);
     void router.push({
       pathname: router.pathname,
-      query: { modal: buttonName, id: router.query.id }
+      query: {
+        modal: buttonName,
+        ...(router.query.id && { id: router.query.id })
+      }
     });
   };
 
@@ -29,7 +32,9 @@ export const Modal = ({ buttonName, children }: ModalProps) => {
     setIsOpen(false);
     void router.push({
       pathname: router.pathname,
-      query: { id: router.query.id }
+      query: {
+        ...(router.query.id && { id: router.query.id })
+      }
     });
   };
 
