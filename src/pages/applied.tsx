@@ -7,11 +7,11 @@ import Link from 'next/link';
 import { authOptions } from 'server/auth';
 
 export const AppliedJobs = () => {
-  const { data } = useSession();
+  const { data: session } = useSession();
 
-  if (data?.user.role !== 'CANDIDATE') return <></>;
+  if (session?.user.role !== 'CANDIDATE') return <></>;
 
-  const appliedJobs = data?.user.candidate.applications.map(application => ({
+  const appliedJobs = session?.user.candidate.applications.map(application => ({
     ...application.job,
     status: application.status
   }));
@@ -53,6 +53,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   }
 
   return {
-    props: {}
+    props: {
+      session
+    }
   };
 }

@@ -1,14 +1,14 @@
 import { type GetServerSidePropsContext } from 'next';
-import { useSession } from 'next-auth/react';
 import { CandidateProfile } from 'components/profiles/candidate';
 import { CompanyProfile } from 'components/profiles/company';
 import { ModeratorProfile } from 'components/profiles/moderator';
 import { getServerSession } from 'next-auth';
 import { authOptions } from 'server/auth';
+import { useSession } from 'next-auth/react';
 
 const Profile = () => {
-  const { data } = useSession();
-  const user = data?.user;
+  const { data: session } = useSession();
+  const user = session?.user;
 
   if (!user) return <></>;
 
@@ -40,6 +40,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   }
 
   return {
-    props: {}
+    props: {
+      session
+    }
   };
 }

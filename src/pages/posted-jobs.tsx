@@ -1,13 +1,13 @@
 import { type GetServerSidePropsContext } from 'next';
-import { useSession } from 'next-auth/react';
 import { PostedJobsTable } from 'components/posted-jobs-table';
 import { PostedJobRow } from 'components/posted-job-row';
 import { getServerSession } from 'next-auth';
 import { authOptions } from 'server/auth';
+import { useSession } from 'next-auth/react';
 
 const PostedJobs = () => {
-  const { data } = useSession();
-  const user = data?.user;
+  const { data: session } = useSession();
+  const user = session?.user;
 
   if (user?.role !== 'COMPANY') return <></>;
 
@@ -35,6 +35,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   }
 
   return {
-    props: {}
+    props: {
+      session
+    }
   };
 }

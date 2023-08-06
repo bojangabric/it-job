@@ -7,11 +7,11 @@ import Link from 'next/link';
 import { authOptions } from 'server/auth';
 
 export const SavedJobs = () => {
-  const { data } = useSession();
+  const { data: session } = useSession();
 
-  if (data?.user.role !== 'CANDIDATE') return <></>;
+  if (session?.user.role !== 'CANDIDATE') return <></>;
 
-  const savedJobs = data?.user.candidate.savedJobs;
+  const savedJobs = session?.user.candidate.savedJobs;
 
   if (!savedJobs || savedJobs.length === 0)
     return (
@@ -50,6 +50,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   }
 
   return {
-    props: {}
+    props: {
+      session
+    }
   };
 }
