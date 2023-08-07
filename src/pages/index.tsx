@@ -86,7 +86,7 @@ const Home = () => {
           </div>
         </div>
         <div className="w-1/2">
-          <img className="rounded-md" src="/images/work.jpg" />
+          <img className="h-full w-full rounded-md" src="/images/work.png" />
         </div>
       </div>
       <Testimonials />
