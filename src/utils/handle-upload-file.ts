@@ -8,11 +8,11 @@ interface UploadApiResponse {
 export const uploadFile = async (file: File) => {
   const formData = new FormData();
   formData.append('file', file);
-  formData.append('upload_preset', env.CLOUDINARY_UPLOAD_PRESET);
+  formData.append('upload_preset', env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET);
   formData.append('public_id', file.name.replace(/\.[^\/.]+$/, ''));
 
   const response = await fetch(
-    `https://api.cloudinary.com/v1_1/${env.CLOUDINARY_CLOUD_NAME}/upload`,
+    `https://api.cloudinary.com/v1_1/${env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/upload`,
     {
       method: 'POST',
       body: formData
