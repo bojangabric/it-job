@@ -1,7 +1,7 @@
 import { AppliedRow } from 'components/tables/applied-row';
 import { TableLayoutApplied } from 'components/tables/table-layout-applied';
 import { type GetServerSidePropsContext } from 'next';
-import { getServerSession } from 'next-auth';
+import { type Session, getServerSession } from 'next-auth';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { authOptions } from 'server/auth';
@@ -54,7 +54,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   return {
     props: {
-      session
+      session: JSON.parse(JSON.stringify(session)) as Session
     }
   };
 }

@@ -2,7 +2,7 @@ import { CheckCircleIcon } from '@heroicons/react/24/solid';
 import { ButtonLink } from 'components/button-link';
 import Testimonials from 'components/testimonials';
 import { type GetServerSidePropsContext } from 'next';
-import { getServerSession } from 'next-auth';
+import { type Session, getServerSession } from 'next-auth';
 import { useSession } from 'next-auth/react';
 import { authOptions } from 'server/auth';
 import { Pattern } from 'svgs/pattern';
@@ -118,7 +118,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   return {
     props: {
-      session
+      session: JSON.parse(JSON.stringify(session)) as Session
     }
   };
 }

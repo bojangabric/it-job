@@ -2,7 +2,7 @@ import { type GetServerSidePropsContext } from 'next';
 import { api } from 'utils/api';
 import { UnapprovedJobRow } from 'components/unapproved-job-row';
 import { UnapprovedJobsTable } from 'components/unapproved-jobs-table';
-import { getServerSession } from 'next-auth';
+import { type Session, getServerSession } from 'next-auth';
 import { authOptions } from 'server/auth';
 import { useSession } from 'next-auth/react';
 
@@ -38,7 +38,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   return {
     props: {
-      session
+      session: JSON.parse(JSON.stringify(session)) as Session
     }
   };
 }
