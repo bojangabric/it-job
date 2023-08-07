@@ -35,7 +35,10 @@ export default function UserMenu() {
 
   return (
     <div className="flex items-center justify-center gap-2">
-      <img src={data?.user.image} className="h-6 w-auto rounded-full" />
+      <img
+        src={data?.user.image}
+        className="h-6 w-6 rounded-full object-cover"
+      />
       <Menu as="div" className="relative inline-block text-left">
         <div>
           <Menu.Button className="inline-flex w-full justify-center rounded-md text-base font-medium text-white  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">

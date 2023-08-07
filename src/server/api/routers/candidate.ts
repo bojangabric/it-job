@@ -5,6 +5,14 @@ import {
   publicProcedure
 } from 'server/api/trpc';
 import bcrypt from 'bcrypt';
+import cloudinary from 'cloudinary';
+import { env } from 'env.mjs';
+
+cloudinary.v2.config({
+  cloud_name: env.CLOUDINARY_CLOUD_NAME,
+  api_key: env.CLOUDINARY_API_KEY,
+  api_secret: env.CLOUDINARY_API_SECRET
+});
 
 export const candidateRouter = createTRPCRouter({
   register: publicProcedure
@@ -39,8 +47,17 @@ export const candidateRouter = createTRPCRouter({
     });
   }),
   updateResume: protectedProcedure
-    .input(z.string())
+    .input(
+      z.object({
+        file: z.string(),
+        fileName: z.string()
+      })
+    )
     .mutation(async ({ input, ctx }) => {
+      const uploadResult = await cloudinary.v2.uploader.upload(input.file, {
+        public_id: input.fileName
+      });
+
       return await ctx.prisma.account.update({
         where: {
           id: ctx.session.user.id
@@ -48,7 +65,7 @@ export const candidateRouter = createTRPCRouter({
         data: {
           candidate: {
             update: {
-              resume: input
+              resume: uploadResult.url
             }
           }
         }

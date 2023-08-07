@@ -1,18 +1,17 @@
-import { useSession } from 'next-auth/react';
-import { api } from 'utils/api';
 import { FieldRow } from 'components/profile/field-row';
-import { handleFileUpload } from 'utils/handle-upload-file';
+import { Spinner } from 'components/spinner';
+import { useFileUpload } from 'utils/use-upload-file';
 
 export const Image = ({ image }: { image: string }) => {
-  const { update } = useSession();
-
-  const { mutate: updateImage } = api.user.updateImage.useMutation({
-    onSuccess: update
-  });
+  const { uploadImage, status } = useFileUpload();
 
   return (
     <FieldRow fieldName="Image">
-      <div className="group relative inline-block w-auto overflow-hidden rounded-md">
+      <div
+        className={`${
+          status === 'idle' ? 'group' : ''
+        } relative inline-block w-auto overflow-hidden rounded-md`}
+      >
         <label className="flex cursor-pointer flex-col items-center">
           <div className="absolute z-10 flex h-full w-full flex-col items-center justify-center font-semibold text-white opacity-0 transition group-hover:opacity-100">
             <svg
@@ -27,14 +26,25 @@ export const Image = ({ image }: { image: string }) => {
             <input
               type="file"
               className="hidden"
-              onChange={e => void handleFileUpload(e, updateImage)}
+              accept="image/*"
+              onChange={e => void uploadImage(e)}
             />
           </div>
+          {status === 'uploading' && (
+            <div className="absolute z-10 flex h-full w-full flex-col items-center justify-center backdrop-blur-[3px] backdrop-contrast-[40%] transition">
+              <Spinner className="stroke-gray-300" />
+            </div>
+          )}
         </label>
         <img
           src={image}
-          className="block h-52 max-h-52 filter transition group-hover:blur-[3px] group-hover:contrast-[40%]"
+          className="max-h-52 max-w-[13rem] object-cover transition group-hover:blur-[3px] group-hover:contrast-[40%]"
         />
+        {status === 'error' && (
+          <div className="mt-2 rounded-full bg-yellow-100 px-3 py-0.5 text-sm text-yellow-700">
+            Use image smaller than 1MB.
+          </div>
+        )}
       </div>
     </FieldRow>
   );

@@ -1,14 +1,9 @@
 import { PaperClipIcon } from '@heroicons/react/24/solid';
-import { useSession } from 'next-auth/react';
-import { api } from 'utils/api';
-import { handleFileUpload } from 'utils/handle-upload-file';
+import { Spinner } from 'components/spinner';
+import { useFileUpload } from 'utils/use-upload-file';
 
 export const UpdateResume = ({ resume }: { resume: string }) => {
-  const { update } = useSession();
-
-  const { mutate: updateResume } = api.candidate.updateResume.useMutation({
-    onSuccess: update
-  });
+  const { uploadResume, status } = useFileUpload();
 
   return (
     <>
@@ -30,10 +25,15 @@ export const UpdateResume = ({ resume }: { resume: string }) => {
             type="file"
             className="hidden"
             accept=".pdf"
-            onChange={e => void handleFileUpload(e, updateResume)}
+            onChange={e => void uploadResume(e)}
           />
         </label>
       </div>
+      {status === 'uploading' && (
+        <div className="absolute inset-0 flex items-center justify-center rounded-md backdrop-blur-[3px] backdrop-contrast-[95%]">
+          <Spinner className="!h-6 stroke-gray-500" />
+        </div>
+      )}
     </>
   );
 };

@@ -1,6 +1,7 @@
 import { useFilters } from './filter/use-filters';
 import { JobCard } from './job-card';
 import { api } from 'utils/api';
+import { Spinner } from './spinner';
 
 export const JobsList = () => {
   const { activeEnumFilters } = useFilters();
@@ -10,16 +11,7 @@ export const JobsList = () => {
   if (status === 'loading')
     return (
       <div className="flex w-full items-center justify-center">
-        <svg className="spinner" viewBox="0 0 50 50">
-          <circle
-            className="path"
-            cx="25"
-            cy="25"
-            r="20"
-            fill="none"
-            stroke-width="5"
-          ></circle>
-        </svg>
+        <Spinner className="stroke-[#93bfec]" />
       </div>
     );
 

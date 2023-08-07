@@ -1,13 +1,8 @@
-import { useSession } from 'next-auth/react';
-import { api } from 'utils/api';
-import { handleFileUpload } from 'utils/handle-upload-file';
+import { Spinner } from 'components/spinner';
+import { useFileUpload } from 'utils/use-upload-file';
 
 export const AddResume = () => {
-  const { update } = useSession();
-
-  const { mutate: updateResume } = api.candidate.updateResume.useMutation({
-    onSuccess: update
-  });
+  const { uploadResume, status } = useFileUpload();
 
   return (
     <div className="ml-2">
@@ -17,9 +12,14 @@ export const AddResume = () => {
           type="file"
           className="hidden"
           accept=".pdf"
-          onChange={e => void handleFileUpload(e, updateResume)}
+          onChange={e => void uploadResume(e)}
         />
       </label>
+      {status === 'uploading' && (
+        <div className="absolute inset-0 flex items-center justify-center rounded-md backdrop-blur-[3px] backdrop-contrast-[95%]">
+          <Spinner className="!h-6 stroke-gray-500" />
+        </div>
+      )}
     </div>
   );
 };
