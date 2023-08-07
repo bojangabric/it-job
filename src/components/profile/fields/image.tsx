@@ -9,7 +9,7 @@ export const Image = ({ image }: { image: string }) => {
     <FieldRow fieldName="Image">
       <div
         className={`${
-          status === 'idle' ? 'group' : ''
+          status === 'idle' ? 'group' : 'pointer-events-none'
         } relative inline-block w-auto overflow-hidden rounded-md`}
       >
         <label className="flex cursor-pointer flex-col items-center">
