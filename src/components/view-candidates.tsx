@@ -18,7 +18,8 @@ export const ViewCandidates = ({
     setIsOpen(true);
   }
 
-  if (candidates.length === 0) return <>No candidates</>;
+  if (candidates.length === 0)
+    return <span className="whitespace-nowrap">No candidates</span>;
 
   return (
     <>

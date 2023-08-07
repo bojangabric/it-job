@@ -4,7 +4,6 @@ import { transformExperienceToValue } from 'utils/transform-experience-to-value'
 import { transformPositionToValue } from 'utils/transform-position-to-value';
 import { transformTypeToValue } from 'utils/transform-type-to-value';
 import { Toggle } from './toggle';
-import { XCircleIcon } from '@heroicons/react/24/solid';
 import { formatDistance } from 'date-fns';
 import Link from 'next/link';
 import { ViewCandidates } from './view-candidates';
@@ -38,8 +37,10 @@ export const PostedJobRow = ({
         approved ? '' : 'pointer-events-none relative bg-gray-200 opacity-30'
       } border-b`}
     >
-      <td className="flex items-center justify-center whitespace-nowrap px-6 py-4 text-gray-900">
-        <Toggle enabled={active} onChange={() => toggleJob(id)} />
+      <td className="px-6 py-4">
+        <div className="flex items-center justify-center whitespace-nowrap px-6 py-4 text-gray-900">
+          <Toggle enabled={active} onChange={() => toggleJob(id)} />
+        </div>
       </td>
       <td className="px-6 py-4">
         <Link href={`jobs/${id}`}>
@@ -51,27 +52,33 @@ export const PostedJobRow = ({
       </td>
       <td className="px-6 py-4">{transformExperienceToValue(experience)}</td>
       <td className="px-6 py-4">{transformTypeToValue(type)}</td>
-      <td className="space-x-2 px-6 py-4">
-        {skills.map(skill => (
-          <span
-            key={skill}
-            className="rounded-full bg-green-100 px-3 py-1 text-sm text-green-600"
-          >
-            {skill}
-          </span>
-        ))}
+      <td className="px-6 py-4">
+        <div className="flex max-w-xs flex-wrap leading-loose">
+          {skills.map(skill => (
+            <span
+              key={skill}
+              className="my-1 mr-2 rounded-full bg-green-100 px-3 py-1 text-sm text-green-600"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
       </td>
       <td className="px-6 py-4">
         {formatDistance(new Date(createdAt), new Date(), {
           addSuffix: true
         })}
       </td>
-      <td className="flex items-center gap-2 px-6 py-4">
-        <ViewCandidates candidates={applicants} />
-        <XCircleIcon
-          className="h-8 w-8 cursor-pointer text-red-400 transition hover:text-red-600"
-          onClick={() => removeJob(id)}
-        />
+      <td className="px-6 py-4">
+        <div className="flex items-center gap-8 px-6 py-4">
+          <ViewCandidates candidates={applicants} />
+          <button
+            className="whitespace-nowrap text-red-400 transition hover:text-red-600"
+            onClick={() => removeJob(id)}
+          >
+            Delete job
+          </button>
+        </div>
       </td>
     </tr>
   );
