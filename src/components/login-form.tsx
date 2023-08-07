@@ -10,16 +10,21 @@ interface FormFields {
 }
 
 export const LoginForm = () => {
-  const [showError, setShowError] = useState(false);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { register, handleSubmit } = useForm<FormFields>();
 
   const onSubmit: SubmitHandler<FormFields> = async data => {
+    setLoading(true);
+
     const res = await signIn('credentials', {
       email: data.email,
       password: data.password,
       redirect: false
     });
-    setShowError(!res?.ok);
+
+    setError(!res?.ok);
+    setLoading(!res?.ok);
   };
 
   return (
@@ -40,8 +45,8 @@ export const LoginForm = () => {
           {...register('password', { required: true })}
         />
       </label>
-      <Button label="Login" />
-      {showError && (
+      <Button label="Login" loading={loading} />
+      {error && (
         <p className="rounded bg-red-200 px-2 py-2 text-red-600">
           Wrong email or password.
         </p>
