@@ -1,7 +1,7 @@
 import { type GetServerSidePropsContext } from 'next';
 import { PostedJobsTable } from 'components/posted-jobs-table';
 import { PostedJobRow } from 'components/posted-job-row';
-import { getServerSession } from 'next-auth';
+import { type Session, getServerSession } from 'next-auth';
 import { authOptions } from 'server/auth';
 import { useSession } from 'next-auth/react';
 
@@ -36,7 +36,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   return {
     props: {
-      session
+      session: JSON.parse(JSON.stringify(session)) as Session
     }
   };
 }
