@@ -1,8 +1,8 @@
 import { Spinner } from 'components/spinner';
-import { useFileUpload } from 'utils/use-upload-file';
+import { useUploadResume } from 'utils/upload/use-upload-resume';
 
 export const AddResume = () => {
-  const { uploadResume, status } = useFileUpload();
+  const { uploadResume, status } = useUploadResume();
 
   return (
     <div className="ml-2">
@@ -15,7 +15,7 @@ export const AddResume = () => {
           onChange={e => void uploadResume(e)}
         />
       </label>
-      {status === 'uploading' && (
+      {status === 'loading' && (
         <div className="absolute inset-0 flex items-center justify-center rounded-md backdrop-blur-[3px] backdrop-contrast-[95%]">
           <Spinner className="!h-6 stroke-gray-500" />
         </div>

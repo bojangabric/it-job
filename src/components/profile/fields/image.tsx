@@ -1,9 +1,9 @@
 import { FieldRow } from 'components/profile/field-row';
 import { Spinner } from 'components/spinner';
-import { useFileUpload } from 'utils/use-upload-file';
+import { useUploadImage } from 'utils/upload/use-upload-image';
 
 export const Image = ({ image }: { image: string }) => {
-  const { uploadImage, status } = useFileUpload();
+  const { uploadImage, status } = useUploadImage();
 
   return (
     <FieldRow fieldName="Image">
@@ -30,7 +30,7 @@ export const Image = ({ image }: { image: string }) => {
               onChange={e => void uploadImage(e)}
             />
           </div>
-          {status === 'uploading' && (
+          {status === 'loading' && (
             <div className="absolute z-10 flex h-full w-full flex-col items-center justify-center backdrop-blur-[3px] backdrop-contrast-[40%] transition">
               <Spinner className="stroke-gray-300" />
             </div>
