@@ -1,22 +1,15 @@
 import { useSession } from 'next-auth/react';
-import { api } from 'utils/api';
+import { CancelApplication } from 'components/jobs/cancel-application';
+import { ApplyToJob } from 'components/jobs/apply-to-job';
 
 export const JobApplicationButton = ({ jobId }: { jobId: string }) => {
-  const { data, update } = useSession();
-  const { mutate: apply } = api.candidate.apply.useMutation({
-    onSuccess: update
-  });
-  const { mutate: cancelApplication } =
-    api.candidate.cancelApplication.useMutation({
-      onSuccess: update
-    });
+  const { data } = useSession();
 
   if (!data)
     return (
       <div className="mt-10 text-center">
         <button
           disabled
-          onClick={() => apply(jobId)}
           className="rounded-md bg-blue-700 px-5 py-3 text-base font-medium text-white focus:outline-none disabled:bg-gray-300 disabled:text-gray-500"
         >
           Apply
@@ -50,25 +43,7 @@ export const JobApplicationButton = ({ jobId }: { jobId: string }) => {
     );
 
   if (application?.status === 'APPLIED')
-    return (
-      <div className="mt-10 text-center">
-        <button
-          onClick={() => cancelApplication(jobId)}
-          className="rounded-md bg-red-200 px-5 py-3 text-base font-medium text-red-600 focus:outline-none disabled:bg-gray-300 disabled:text-gray-500"
-        >
-          Cancel application
-        </button>
-      </div>
-    );
+    return <CancelApplication jobId={jobId} />;
 
-  return (
-    <div className="mt-10 text-center">
-      <button
-        onClick={() => apply(jobId)}
-        className="rounded-md bg-blue-700 px-5 py-3 text-base font-medium text-white focus:outline-none disabled:bg-gray-300 disabled:text-gray-500"
-      >
-        Apply to job
-      </button>
-    </div>
-  );
+  return <ApplyToJob jobId={jobId} />;
 };
