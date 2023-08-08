@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import data from './data.json';
-import { useFilters } from './use-filters';
+import data from 'components/filter/data.json';
+import { useFilters } from 'components/filter/use-filters';
 import {
   type EmploymentType,
   type Experience,

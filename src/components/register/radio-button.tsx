@@ -1,6 +1,6 @@
 import { RadioGroup } from '@headlessui/react';
+import { type ROLE } from 'components/register/fields';
 import { type SVGProps } from 'react';
-import { type ROLE } from './fields';
 
 interface RadioButtonProps {
   values: string[];

@@ -1,6 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
-import { CandidatesTable } from './candidates-table';
+import { CandidatesTable } from 'components/candidates-table';
 import { type JobWithCandidates } from 'next-auth';
 
 export const ViewCandidates = ({

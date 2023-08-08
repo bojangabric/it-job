@@ -1,5 +1,5 @@
 import { type Comment as CommentPrisma } from '@prisma/client';
-import { CommentInput } from './input';
+import { CommentInput } from 'components/comments/input';
 import { useSession } from 'next-auth/react';
 
 type Comment = CommentPrisma & {

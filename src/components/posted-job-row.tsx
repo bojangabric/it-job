@@ -3,10 +3,10 @@ import { api } from 'utils/api';
 import { transformExperienceToValue } from 'utils/transform-experience-to-value';
 import { transformPositionToValue } from 'utils/transform-position-to-value';
 import { transformTypeToValue } from 'utils/transform-type-to-value';
-import { Toggle } from './toggle';
+import { Toggle } from 'components/toggle';
 import { formatDistance } from 'date-fns';
 import Link from 'next/link';
-import { ViewCandidates } from './view-candidates';
+import { ViewCandidates } from 'components/view-candidates';
 import { type JobWithCandidates } from 'next-auth';
 
 export const PostedJobRow = ({

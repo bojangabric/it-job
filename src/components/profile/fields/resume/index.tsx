@@ -1,6 +1,6 @@
 import { FieldRow } from 'components/profile/field-row';
-import { UpdateResume } from './update-resume';
-import { AddResume } from './add-resume';
+import { AddResume } from 'components/profile/fields/resume/add-resume';
+import { UpdateResume } from 'components/profile/fields/resume/update-resume';
 
 export const Resume = ({ resume }: { resume: string | null }) => {
   return (

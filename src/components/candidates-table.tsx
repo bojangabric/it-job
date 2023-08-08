@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { CandidateRow } from './candidate-row';
+import { CandidateRow } from 'components/candidate-row';
 import { type JobWithCandidates } from 'next-auth';
 
 export const CandidatesTable = forwardRef<

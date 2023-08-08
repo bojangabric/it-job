@@ -1,6 +1,6 @@
 import { api } from 'utils/api';
 import { transformPositionToValue } from 'utils/transform-position-to-value';
-import { Toggle } from './toggle';
+import { Toggle } from 'components/toggle';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 import { formatDistance } from 'date-fns';
 import Link from 'next/link';

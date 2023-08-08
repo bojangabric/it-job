@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import { Modal } from 'components/modal';
 import { LoginForm } from 'components/login-form';
 import { RegisterForm } from 'components/register/register-form';
-import UserMenu from './user-menu';
+import UserMenu from 'components/header/user-menu';
 
 export const Header = () => {
   const { data } = useSession();

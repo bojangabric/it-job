@@ -1,9 +1,9 @@
 import { createTRPCRouter } from 'server/api/trpc';
 import { userRouter } from 'server/api/routers/user';
-import { jobPostsRouter } from './routers/job-posts';
-import { candidateRouter } from './routers/candidate';
-import { companyRouter } from './routers/company';
-import { moderatorRouter } from './routers/moderator';
+import { companyRouter } from 'server/api/routers/company';
+import { candidateRouter } from 'server/api/routers/candidate';
+import { moderatorRouter } from 'server/api/routers/moderator';
+import { jobPostsRouter } from 'server/api/routers/job-posts';
 
 /**
  * This is the primary router for your server.

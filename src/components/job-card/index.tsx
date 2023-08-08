@@ -1,5 +1,5 @@
 import { transformTypeToValue } from 'utils/transform-type-to-value';
-import { SaveJobButton } from './save-job-button';
+import { SaveJobButton } from 'components/job-card/save-job-button';
 import { type JobPostWithEmployer } from 'next-auth';
 
 export const JobCard = ({

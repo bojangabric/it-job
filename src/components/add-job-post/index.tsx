@@ -1,6 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
-import { Form } from './form';
+import { Form } from 'components/add-job-post/form';
 
 export const AddJobPost = () => {
   const [isOpen, setIsOpen] = useState(false);

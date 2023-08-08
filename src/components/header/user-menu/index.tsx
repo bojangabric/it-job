@@ -2,7 +2,7 @@ import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { useSession } from 'next-auth/react';
-import { UserMenuItem } from './user-menu-item';
+import { UserMenuItem } from 'components/header/user-menu/user-menu-item';
 import { signOut } from 'next-auth/react';
 
 const MenuOptions = {

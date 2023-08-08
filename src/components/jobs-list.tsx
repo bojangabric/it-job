@@ -1,7 +1,7 @@
-import { useFilters } from './filter/use-filters';
-import { JobCard } from './job-card';
+import { useFilters } from 'components/filter/use-filters';
+import { JobCard } from 'components/job-card';
 import { api } from 'utils/api';
-import { Spinner } from './spinner';
+import { Spinner } from 'components/spinner';
 
 export const JobsList = () => {
   const { activeEnumFilters } = useFilters();
