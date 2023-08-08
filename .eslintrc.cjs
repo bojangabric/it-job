@@ -27,7 +27,13 @@ const config = {
     ],
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     '@next/next/no-img-element': 'off',
-    'jsx-a11y/alt-text': [0]
+    'jsx-a11y/alt-text': [0],
+    'no-restricted-imports': [
+      'error',
+      {
+        patterns: ['.*']
+      }
+    ]
   }
 };
 
