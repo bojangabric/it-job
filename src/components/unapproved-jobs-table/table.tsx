@@ -1,10 +1,10 @@
 import { type ReactNode } from 'react';
 
-type TableLayoutProps = {
+type TableProps = {
   children: ReactNode;
 };
 
-export const UnapprovedJobsTable = ({ children }: TableLayoutProps) => {
+export const Table = ({ children }: TableProps) => {
   return (
     <div className="mx-auto my-20 max-w-7xl">
       <table className="mt-8 w-full text-left text-sm text-gray-500 shadow-md sm:rounded-lg">

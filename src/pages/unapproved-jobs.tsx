@@ -1,10 +1,9 @@
 import { type GetServerSidePropsContext } from 'next';
 import { api } from 'utils/api';
-import { UnapprovedJobRow } from 'components/unapproved-job-row';
-import { UnapprovedJobsTable } from 'components/unapproved-jobs-table';
 import { type Session, getServerSession } from 'next-auth';
 import { authOptions } from 'server/auth';
 import { useSession } from 'next-auth/react';
+import { UnapprovedJobsTable } from 'components/unapproved-jobs-table';
 
 const UnapprovedJobs = () => {
   const { data: session } = useSession();
@@ -13,13 +12,7 @@ const UnapprovedJobs = () => {
 
   if (user?.role !== 'MODERATOR' || !allJobs) return <></>;
 
-  return (
-    <UnapprovedJobsTable>
-      {allJobs.map(job => (
-        <UnapprovedJobRow key={job.id} {...job} />
-      ))}
-    </UnapprovedJobsTable>
-  );
+  return <UnapprovedJobsTable jobs={allJobs} />;
 };
 
 export default UnapprovedJobs;

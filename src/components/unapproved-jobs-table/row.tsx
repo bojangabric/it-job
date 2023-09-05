@@ -6,7 +6,7 @@ import { formatDistance } from 'date-fns';
 import Link from 'next/link';
 import { type JobPostWithEmployer } from 'next-auth';
 
-export const UnapprovedJobRow = ({
+export const Row = ({
   title,
   position,
   id,
