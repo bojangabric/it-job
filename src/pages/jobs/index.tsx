@@ -1,5 +1,5 @@
 import { Filter } from 'components/filter';
-import { JobsList } from 'components/jobs-list';
+import { JobList } from 'components/job-list';
 import { SearchBar } from 'components/search-bar';
 import { useEffect } from 'react';
 
@@ -13,7 +13,7 @@ const Jobs = () => {
       <SearchBar />
       <div className="my-10 flex space-x-16">
         <Filter />
-        <JobsList />
+        <JobList />
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import { JobCard } from 'components/job-card';
 import { api } from 'utils/api';
 import { Spinner } from 'components/spinner';
 
-export const JobsList = () => {
+export const JobList = () => {
   const { activeEnumFilters } = useFilters();
   const { data: jobPosts, status } =
     api.jobPosts.getAll.useQuery(activeEnumFilters);
