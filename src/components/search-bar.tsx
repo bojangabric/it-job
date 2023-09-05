@@ -60,7 +60,7 @@ export const SearchBar = () => {
         />
         <button
           onClick={search}
-          className="rounded-l-none rounded-r-md bg-blue-500 !py-5 !px-12 text-center text-white"
+          className="rounded-l-none rounded-r-md bg-blue-500 !py-5 !px-12 text-center text-white hover:bg-blue-600"
         >
           Search
         </button>
