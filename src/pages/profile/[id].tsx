@@ -17,12 +17,12 @@ const CandidateProfile = ({ profileId }: { profileId: string }) => {
           Candidate info
         </h3>
       </div>
-      <FieldRow fieldName="Slika">
+      <FieldRow fieldName="Image">
         <div className="inline-block w-auto overflow-hidden rounded-md">
           <img src={candidate.account.image} className="block h-52 max-h-52" />
         </div>
       </FieldRow>
-      <FieldRow fieldName="Ime i prezime">{candidate.account.name}</FieldRow>
+      <FieldRow fieldName="Name">{candidate.account.name}</FieldRow>
       <FieldRow fieldName="Email">{candidate.account.email}</FieldRow>
       <FieldRow fieldName="CV">
         <div className="flex items-center justify-between rounded-md border border-gray-200 py-3 pl-3 pr-4 text-sm">
