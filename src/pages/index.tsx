@@ -1,6 +1,6 @@
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
 import { ButtonLink } from 'components/button-link';
-import Testimonials from 'components/testimonials';
+import { Testimonials } from 'components/testimonials';
 import { type GetServerSidePropsContext } from 'next';
 import { type Session, getServerSession } from 'next-auth';
 import { useSession } from 'next-auth/react';

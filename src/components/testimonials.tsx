@@ -28,7 +28,7 @@ const Testimonial = ({
   </div>
 );
 
-const Testimonials = () => {
+export const Testimonials = () => {
   return (
     <div className="overflow-hidden bg-gray-100">
       <div className="my-32 mx-auto max-w-5xl space-y-16">
@@ -51,5 +51,3 @@ const Testimonials = () => {
     </div>
   );
 };
-
-export default Testimonials;
