@@ -1,7 +1,7 @@
 import { type ChangeEvent } from 'react';
 import { convertToBase64 } from 'utils/upload/convert-to-base64';
 
-export const useFileUpload = () => {
+export const useUploadFile = () => {
   const upload = async (
     event: ChangeEvent<HTMLInputElement>,
     callback: (input: { file: string; fileName: string }) => void
