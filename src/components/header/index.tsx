@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { Logo } from 'svgs/logo';
 import { useSession } from 'next-auth/react';
-import { Modal } from 'components/modal';
-import { LoginForm } from 'components/login-form';
-import { RegisterForm } from 'components/register/register-form';
+import { Modal } from 'components/header/modal';
+import { LoginForm } from 'components/header/login-form';
+import { RegisterForm } from 'components/header/register/register-form';
 import UserMenu from 'components/header/user-menu';
 
 export const Header = () => {

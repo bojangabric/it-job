@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
-import { RadioButton } from 'components/register/radio-button';
+import { RadioButton } from 'components/header/register/radio-button';
 import { Button } from 'components/button';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import {
   FIELDS,
   type FORM_FIELDS,
   type ROLE
-} from 'components/register/fields';
+} from 'components/header/register/fields';
 import { api } from 'utils/api';
 
 export const RegisterForm = () => {
