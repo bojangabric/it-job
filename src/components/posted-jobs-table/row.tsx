@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { ViewCandidates } from 'components/view-candidates';
 import { type JobWithCandidates } from 'next-auth';
 
-export const PostedJobRow = ({
+export const Row = ({
   title,
   position,
   experience,

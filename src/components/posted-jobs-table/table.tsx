@@ -1,11 +1,11 @@
 import { type ReactNode } from 'react';
 import { AddJobPost } from 'components/add-job-post';
 
-type TableLayoutProps = {
+type TableProps = {
   children: ReactNode;
 };
 
-export const PostedJobsTable = ({ children }: TableLayoutProps) => {
+export const Table = ({ children }: TableProps) => {
   return (
     <div className="mx-auto my-20 max-w-7xl">
       <AddJobPost />

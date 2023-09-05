@@ -1,9 +1,8 @@
 import { type GetServerSidePropsContext } from 'next';
-import { PostedJobsTable } from 'components/posted-jobs-table';
-import { PostedJobRow } from 'components/posted-job-row';
 import { type Session, getServerSession } from 'next-auth';
 import { authOptions } from 'server/auth';
 import { useSession } from 'next-auth/react';
+import { PostedJobsTable } from 'components/posted-jobs-table';
 
 const PostedJobs = () => {
   const { data: session } = useSession();
@@ -11,13 +10,7 @@ const PostedJobs = () => {
 
   if (user?.role !== 'COMPANY') return <></>;
 
-  return (
-    <PostedJobsTable>
-      {user.company.jobs.map(job => (
-        <PostedJobRow key={job.id} {...job} />
-      ))}
-    </PostedJobsTable>
-  );
+  return <PostedJobsTable jobs={user.company.jobs} />;
 };
 
 export default PostedJobs;
