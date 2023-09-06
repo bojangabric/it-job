@@ -1,7 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
-import { CandidatesTable } from 'components/candidates-table';
+import { Table } from 'components/view-candidates/table';
 import { type JobWithCandidates } from 'next-auth';
+import { Fragment, useState } from 'react';
 
 export const ViewCandidates = ({
   candidates
@@ -55,7 +55,7 @@ export const ViewCandidates = ({
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <CandidatesTable candidates={candidates} />
+                <Table candidates={candidates} />
               </Transition.Child>
             </div>
           </div>

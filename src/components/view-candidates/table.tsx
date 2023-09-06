@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import { CandidateRow } from 'components/view-candidates/row';
 import { type JobWithCandidates } from 'next-auth';
 
-export const CandidatesTable = forwardRef<
+export const Table = forwardRef<
   HTMLDivElement,
   { candidates: JobWithCandidates['applicants'] }
 >(({ candidates }, ref) => {
@@ -31,4 +31,4 @@ export const CandidatesTable = forwardRef<
   );
 });
 
-CandidatesTable.displayName = 'CandidatesTable';
+Table.displayName = 'Table';
