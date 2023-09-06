@@ -1,40 +1,107 @@
-# Create T3 App
+# ITJob
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with
-`create-t3-app`.
+User-friendly platform connecting IT professionals of all levels with companies
+looking to hire. The platform simplifies job applications for candidates and the
+hiring process for companies.
 
-## What's next? How do I make an app with this?
+## Demo
 
-We try to keep this project as simple as possible, so you can start with just
-the scaffolding we set up for you, and add additional things later when they
-become necessary.
+Visit [ITJob demo](http://itjob.bojangabric.com/) to check out it's
+functionalities.
 
-If you are not familiar with the different technologies used in this project,
-please refer to the respective docs. If you still are in the wind, please join
-our [Discord](https://t3.gg/discord) and ask for help.
+Candidate login info:
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+- email: `candidate@test.com`
+- password: `candidate123`
 
-## Learn More
+Company login info:
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the
-following resources:
+- email: `bojan@bojan.com`
+- password: `test123`
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available)
-  — Check out these awesome tutorials
+## Run Locally
 
-You can check out the
-[create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) —
-your feedback and contributions are welcome!
+Clone the project
 
-## How do I deploy this?
+```bash
+  git clone [https://link-to-project](https://github.com/bojangabric/it-jobs)
+```
 
-Follow our deployment guides for
-[Vercel](https://create.t3.gg/en/deployment/vercel),
-[Netlify](https://create.t3.gg/en/deployment/netlify) and
-[Docker](https://create.t3.gg/en/deployment/docker) for more information.
+Go to the project directory
+
+```bash
+  cd it-jobs
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+### Environment Variables
+
+To run this project, you will need to add the following environment variables to
+your `.env` file:
+
+```
+CLOUDINARY_CLOUD_NAME
+CLOUDINARY_API_KEY
+CLOUDINARY_API_SECRET
+```
+
+### Starting the app
+
+Start docker
+
+```bash
+  docker-compose up
+```
+
+And run the project
+
+```bash
+  npm run dev
+```
+
+Go to `http://localhost:3000` and you should see the project up and running!
+
+## Role functionalities
+
+Everyone:
+
+- Register & login
+- Search & filter through job posts
+
+Company:
+
+- Add & remove job post
+- Activate & deactivate job post
+- See candidate details
+- Accept & reject candidates
+
+Candidate:
+
+- Apply & cancel application for a job post
+- Comment on a job post
+- Add & update CV
+- Add job post to favorites
+
+Moderator:
+
+- Approve newly made job posts
+
+## Technologies used
+
+- Next.js
+- tRPC
+- Tailwind CSS
+- TypeScript
+- Prisma
+- PostgreSQL
+- NextAuth.js
+- Docker
+
+## Database schema
+
+![Database schema](docs/images/db_schema.png)
