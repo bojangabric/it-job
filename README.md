@@ -16,8 +16,8 @@ Candidate login info:
 
 Company login info:
 
-- email: `bojan@bojan.com`
-- password: `test123`
+- email: `company@test.com`
+- password: `company123`
 
 ## Run Locally
 
