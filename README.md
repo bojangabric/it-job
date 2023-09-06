@@ -24,7 +24,7 @@ Company login info:
 Clone the project
 
 ```bash
-  git clone [https://link-to-project](https://github.com/bojangabric/it-jobs)
+  git clone https://github.com/bojangabric/it-jobs
 ```
 
 Go to the project directory
