@@ -39,6 +39,11 @@ class MyDocument extends Document {
             type="font/woff2"
             crossOrigin="anonymous"
           />
+          <script
+            defer
+            src="https://cloud.umami.is/script.js"
+            data-website-id="3c9bbbef-aa40-41a7-ba79-a7fe8847c9a0"
+          ></script>
         </Head>
         <body>
           <Main />
